@@ -13,3 +13,7 @@
 [hive动态分区插入实验 - CSDN博客](https://blog.csdn.net/wzy0623/article/details/50817883)
 [Hive动态分区 - 简书](https://www.jianshu.com/p/e7debf0980e3)
 [[一起学Hive]之六-Hive的动态分区 – lxw的大数据田地](http://lxw1234.com/archives/2015/06/286.htm)
+
+## 6. Hive：insert into table 与 insert overwrite table 区别 
+
+[Hive：insert into table 与 insert overwrite table 区别 - cctext - 博客园](https://www.cnblogs.com/yy3b2007com/p/7054128.html)

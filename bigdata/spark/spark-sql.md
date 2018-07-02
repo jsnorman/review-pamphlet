@@ -21,6 +21,7 @@ Spark SQL 的功能之一是执行 SQL 查询.Spark SQL 也能够被用于从已
 
 ### DateSet
 
+
 一个 Dataset 是一个分布式的数据集合 Dataset 是在 Spark 1.6 中被添加的新接口, 它提供了 RDD 的优点（强类型化, 能够使用强大的 lambda 函数）  Spark SQL执行引擎的优点.一个 Dataset 可以从 JVM 对象来 构造 并且使用转换功能（map, flatMap, filter, 等等）.
 
 从Spark 2.0开始始，Dataset开始具有两种不同类型的API特征：有明确类型的API和无类型的API。从概念上来说，你可以把DataFrame当作一些通用对象Dataset[Row]的集合的一个别名，而一行就是一个通用的无类型的JVM对象。与之形成对比，Dataset就是一些有明确类型定义的JVM对象的集合，通过你在Scala中定义的Case Class或者Java中的Class来指定。
