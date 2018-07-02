@@ -92,6 +92,38 @@ topic各分区都存在已提交的offset时，从offset后开始消费；只要
 
 ## 6. kafka 的 rebalance 是怎样的？
 
+![image](http://static.lovedata.net/jpg/2018/6/29/9e105be3ad21eeabe8bab88988b09e87.jpg)
+
+GroupCoordinator
+
+根据上面所述，一个具体的 group，是根据其 group 名进行 hash 并计算得到其具对应的 partition 值，该 partition leader 所在 Broker 即为该 Group 所对应的 GroupCoordinator，GroupCoordinator 会存储与该 group 相关的所有的 Meta 信息。
+
+在 Broker 启动时，每个 Broker 都会启动一个 GroupCoordinator 服务，但只有 __consumer_offsets 的 partition 的 leader 才会直接与 Consumer Client 进行交互，也就是其 group 的 GroupCoordinator，其他的 GroupCoordinator 只是作为备份，一旦作为 leader 的 Broker 挂掉之后及时进行替代
+
+
+Consumer 初始化时 group 状态变化
+
+这里详述一下 Client 进行以上操作时，Server 端 Group 状态的变化情况。当 Consumer Client 首次进行拉取数据，如果该其所属 Group 并不存在时，Group 的状态变化过程如下：
+
+- Consumer Client 发送 join-group 请求，如果 Group 不存在，创建该 Group，Group 的状态为 Empty；
+- 由于 Group 的 member 为空，将该 member 加入到 Group 中，并将当前 member （client）设置为 Group 的 leader，进行 rebalance 操作，Group 的状态变为 preparingRebalance，等待 rebalance.timeout.ms 之后（为了等待其他 member 重新发送 join-group，如果 Group 的状态变为 preparingRebalance，Consumer Client 在进行 poll 操作时，needRejoin() 方法结果就会返回 true，也就意味着当前 Consumer Client 需要重新加入 Group），Group 的 member 更新已经完成，此时 Group 的状态变为 AwaitingSync，并向 Group 的所有 member 返回 join-group 响应；
+- client 在收到 join-group 结果之后，如果发现自己的角色是 Group 的 leader，就进行 assignment，该 leader 将 assignment 的结果通过 sync-group 请求发送给 GroupCoordinator，而 follower 也会向 GroupCoordinator 发送一个 sync-group 请求（只不过对应的字段为空）；
+- 当 GroupCoordinator 收到这个 Group leader 的请求之后，获取 assignment 的结果，将各个 member 对应的 assignment 发送给各个 member，而如果该 Client 是 follower 的话就不做任何处理，此时 group 的状态变为 Stable（也就是说，只有当收到的 Leader 的请求之后，才会向所有 member 返回 sync-group 的结果，这个是只发送一次的，由 leader 请求来触发）。
+
+
+[kafka | Matt's Blog](http://matt33.com/tags/kafka/)
+
+[Kafka 之 Group 状态变化分析及 Rebalance 过程 | Matt's Blog](http://matt33.com/2017/01/16/kafka-group/)
+
+[Kafka之消息传输 | Matt's Blog](http://matt33.com/2016/03/09/kafka-transmit/)
+
+[Kafka 源码解析之 GroupCoordinator 详解（十） | Matt's Blog](http://matt33.com/2018/01/28/server-group-coordinator/)
+
+[kafka系列之(3)——Coordinator与offset管理和Consumer Reba... - 简书](https://www.jianshu.com/p/5aa8776868bb)
+
+[Kafka源码深度解析－序列7 －Consumer －coordinator协议与heartbeat实现原理 - CSDN博客](https://blog.csdn.net/chunlongyu/article/details/52791874)
+
+
 ## 7. kafka中的offset状态，以及high.watermark是什么意思
 
 ![image](http://static.lovedata.net/jpg/2018/5/25/c2fa3b250b6512a80279e8140b1421d7.jpg)
@@ -326,3 +358,66 @@ acks=all 结合 min.insync.replicas 最安全的做法，可以通过异步模�
 2. 控制器选举 重启控制器后系统需要多少时间来回复状态
 3. 依次重启
 4. 不完全首领选举测试
+
+
+## 38 Kafka 可靠性方面的了解？
+
+[kafka 数据可靠性深度解读 - ImportNew](http://www.importnew.com/24973.html)
+
+## 39. kafka 的存储原理
+
+### 39.1 原理
+
+![image](http://static.lovedata.net/jpg/2018/6/29/6bcada812e760caa75d0129415f1c726.jpg)
+
+- Broker：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群；
+- Topic：一类消息，例如page view日志、click日志等都可以以topic的形式存在，Kafka集群能够同时负责多个topic的分发；
+- Partition：topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队；
+- Segment：每个partition又由多个segment file组成；
+  - 里面又有很多大小相等的segment数据文件（这个文件的具体大小可以在config/server.properties中进行设置）
+- offset：每个partition都由一系列有序的、不可变的消息组成，这些消息被连续的追加到partition中。partition中的每个消息都有一个连续的序列号叫做offset，用于partition唯一标识一条消息；
+- message：这个算是kafka文件中最小的存储单位，即是 a commit log。
+
+segment file的组成
+
+- index file和data file，这两个文件是一一对应的，后缀”.index”和”.log”分别表示索引文件和数据文件；
+- partition的第一个segment从0开始，后续每个segment文件名为上一个segment文件最后一条消息的offset
+- ![image](http://static.lovedata.net/jpg/2018/6/29/51b401e9432e91897ee43a7c0645b628.jpg) 
+- ![image](http://static.lovedata.net/jpg/2018/6/29/4fc28d18dcf62a1238ca33c3bdf400ab.jpg)
+
+### 39.1 在partition中如何通过offset查找message
+
+![image](http://static.lovedata.net/jpg/2018/6/29/c3235d6eb5770e966babeccb67d8ba4d.jpg)
+
+例如读取offset=368776的message，需要通过下面2个步骤查找。
+
+**第一步查找segment file**
+上述图2为例，其中00000000000000000000.index表示最开始的文件，起始偏移量(offset)为0.第二个文件00000000000000368769.index的消息量起始偏移量为368770 = 368769 + 1.同样，第三个文件00000000000000737337.index的起始偏移量为737338=737337 + 1，其他后续文件依次类推，以起始偏移量命名并排序这些文件，只要根据offset **二分查找**文件列表，就可以快速定位到具体文件。
+当offset=368776时定位到00000000000000368769.index|log
+
+第二步通过segment file查找message
+通过第一步定位到segment file，当offset=368776时，依次定位到00000000000000368769.index的元数据物理位置和00000000000000368769.log的物理偏移地址，然后再通过00000000000000368769.log顺序查找直到offset=368776为止。
+
+![image](http://static.lovedata.net/jpg/2018/6/29/94eec0f6538ca33006d49e788fe9f43d.jpg)
+
+>index 文件中 的第一个是一个消息在log中的顺序，比如相对于第一个消息，是第三条消息，第二个值是在文件中的物理偏移量，用于文件查找，直接定位到这个position，直接打开后，打开了这个索引段对应的消息，比较消息的头几位数组，对比是否相等，如果不相等，则继续往下面去读，一直读到指定的offset
+
+![image](http://static.lovedata.net/jpg/2018/6/29/f5b24416d69381aa63db92eb1d6f124f.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/6/29/9d2397ceec6cd045f6e16d58c196a6c1.jpg)
+
+### 39.2 存储结构设计原因
+
+1. 为什么有segment，而不是把partition直接设计成单个文件？
+    方便消费后删除，可以节约空间，如果是单个文件，该文件由于会被不断写入，无法删除，则会无限增加。当需要清理时，则需要在保证写入的同时，清理该文件的前面已经过期的消息，效率十分低下。
+2. 为什么有partition？
+    方便水平扩展broker，如果不设计多个partition，那么当部署完成之时，topic就会被限定在一台机器上了，随着业务增加，最终会陷入瓶颈
+3. 索引文件的作用
+    使查找效率为O(1)，即与文件大小无关，与查找的位置无关
+
+参考
+
+[Kafka之数据存储 | Matt's Blog](http://matt33.com/2016/03/08/kafka-store/)
+[Kafka文件存储机制那些事 -](https://tech.meituan.com/kafka-fs-design-theory.html)
+[kafka存储结构 - CSDN博客](https://blog.csdn.net/yaolong336/article/details/80047701)
+[Kafka读写原理与存储结构 | Hello, World](https://qinzhaokun.github.io/2017/09/10/Kafka%E8%AF%BB%E5%86%99%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/)

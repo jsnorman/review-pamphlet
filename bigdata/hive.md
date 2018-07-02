@@ -4,4 +4,12 @@
 
 ## 2. hive 如何调优
 
-## 3. 
+## 3. Hive UADF 聚合函数  
+
+## 4. Hive UDF 自定义函数  他们作用的数据范围是什么？
+
+## 5. hive 动态分区是怎么回事？
+
+[hive动态分区插入实验 - CSDN博客](https://blog.csdn.net/wzy0623/article/details/50817883)
+[Hive动态分区 - 简书](https://www.jianshu.com/p/e7debf0980e3)
+[[一起学Hive]之六-Hive的动态分区 – lxw的大数据田地](http://lxw1234.com/archives/2015/06/286.htm)
