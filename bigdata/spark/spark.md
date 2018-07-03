@@ -4,7 +4,29 @@
 
 ### 1.1.Spark性能优化主要有哪些手段？
 
+1、常规性能调优：分配资源、并行度。。。等
+
+2、JVM调优（Java虚拟机）：JVM相关的参数，通常情况下，如果你的硬件配置、基础的JVM的配置，都ok的话，JVM通常不会造成太严重的性能问题；反而更多的是，在troubleshooting中，JVM占了很重要的地位；JVM造成线上的spark作业的运行报错，甚至失败（比如OOM）。
+
+3、shuffle调优（相当重要）：spark在执行groupByKey、reduceByKey等操作时的，shuffle环节的调优。这个很重要。shuffle调优，其实对spark作业的性能的影响，是相当之高！！！经验：在spark作业的运行过程中，只要一牵扯到有shuffle的操作，基本上shuffle操作的性能消耗，要占到整个spark作业的50%~90%。10%用来运行map等操作，90%耗费在两个shuffle操作。groupByKey、countByKey。
+
+4、spark操作调优（spark算子调优，比较重要）：groupByKey，countByKey或aggregateByKey来重构实现。有些算子的性能，是比其他一些算子的性能要高的。foreachPartition替代foreach。如果一旦遇到合适的情况，效果还是不错的。
+
+5、广播大变量
+
+[spark性能调优都有哪些方法 - CSDN博客](https://blog.csdn.net/HANLIPENGHANLIPENG/article/details/78393450)
+[spark性能优化 - 掘金](https://juejin.im/post/5a40b9bcf265da4312812653)
+
 ### 1.2. 对于Spark你觉得他对于现有大数据的现状的优势和劣势在哪里？
+
+1.Spark的内存计算 主要体现在哪里？
+(a) spark, 相比与map reduce最大的速度提升在于做重复计算时，spark可以重复使用相关的缓存数据，而M/R则会笨拙的不断进行disk i/o.
+ (b) 为了提高容错性，M/R所有的中间结果都会persist到disk， 而M/R 则默认保存在内存。
+2.目前Spark主要存在哪些缺点？
+(a) JVM的内存overhead太大，1G的数据通常需要消耗5G的内存  -> Project Tungsten 正试图解决这个问题；
+(b) 不同的spark app之间缺乏有效的共享内存机制  -> Project Tachyon 在试图引入分布式的内存管理，这样不同的spark app可以共享缓存的数据
+
+[spark与hadoop相比，存在哪些缺陷（劣势） - 云+社区 - 腾讯云](https://cloud.tencent.com/developer/article/1074623)
 
 ### 1.3. Spark的Shuffle原理及调优？
 
@@ -53,6 +75,33 @@
 2. yarn-cluster用于生产环境，因为Driver运行在NodeManager，相当于一个ApplicationMaster，没有网卡流量激增的问题；缺点在于调试不方便，本地用spark-submit提交后，看不到log，只能通过yarn application_id这种命令来查看，很麻烦
 
 ### 1.12.spark运行原理，从提交一个jar到最后返回结果，整个过程
+
+1. 用户通过spark-submit脚本提交应用。
+2. spark-submit根据用户代码及配置确定使用哪个资源管理器，以及在合适的位置启动driver。
+3. driver与集群管理器(如YARN)通信，申请资源以启动executor。
+4. 集群管理器启动executor。
+5. driver进程执行用户的代码，根据程序中定义的transformation和action，进行stage的划分，然后以task的形式发送到executor。（通过DAGScheduler划分stage，通过TaskScheduler和TaskSchedulerBackend来真正申请资源运行task）
+6. task在executor中进行计算并保存结果。
+7. 如果driver中的main()方法执行完成退出，或者调用了SparkContext#stop()，driver会终止executor进程，并且通过集群管理器释放资源。
+
+![image](http://static.lovedata.net/jpg/2018/6/25/08c8c49a405cc88b2ad3ec169b09ca18.jpg)
+
+### Yarn-Cluster
+
+步骤一：Client类提交应用到YARN ResourceManager，向RM申请资源作为AM
+步骤二：在申请到的机器中启动driver，注册成为AM，并调用用户代码，然后创建SparkContext。（driver是一个逻辑概念，并不实际存在，通过抽象出driver这一层，所有的运行模式都可以说是在driver中调用用户代码了）
+步骤三：SparkContext中创建DAGScheduler与YarnClusterScheduler与YarnClusterSchedulerBackend。当在用户代码中遇到action时，即会调用DAGScheduler的runJob，任务开始调度执行。
+步骤四：YarnClusterSchedulerBackend在NodeManager上启动Executor
+步骤五：Executor启动Task，开始执行任务 
+
+![image](http://static.lovedata.net/jpg/2018/6/25/db6d9c7a2c79d10b803760d02bccb7f1.jpg)
+
+### Yarn-Client
+
+![image](http://static.lovedata.net/jpg/2018/6/25/883bd9e6fef3896ed47d4c4fd942c19b.jpg)
+
+参考
+[spark提交应用的全流程分析 - CSDN博客](https://blog.csdn.net/jediael_lu/article/details/76735217)
 
 ### 1.13. spark的stage划分是怎么实现的？拓扑排序？怎么实现？还有什么算法实现？
 
@@ -145,7 +194,6 @@
         而另外两个普通的RDD就照常join即可。
         最后将两次join的结果使用union算子合并起来即可，就是最终的join结果。
         ![image](http://static.lovedata.net/jpg/2018/6/14/de04f1729bec2ba1c5b6569952473d38.jpg)
-6. 解决方案七：使用随机前缀和扩容RDD进行join
-
+7. 解决方案七：使用随机前缀和扩容RDD进行join
 
 [Spark性能优化指南——高级篇 -](https://tech.meituan.com/spark-tuning-pro.html)

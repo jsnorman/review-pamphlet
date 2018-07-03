@@ -146,3 +146,5 @@ scan数据就和开发商盖房一样，也是分成两步：组建施工队体�
 BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到Cache中，以便后续同一请求或者邻近数据查找请求直接从内存中获取，避免昂贵的IO操作，重要性不言而喻。BlockCache有两种实现机制：LRUBlockCache和BucketCache（通常是off-heap）
 
 1. BlockCache的内容
+
+## 16. 行式存储和列式存储的优劣势？
