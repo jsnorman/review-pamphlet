@@ -1,6 +1,18 @@
 # HDFS
 
-## 1 hdfs 的数据压缩算法
+## 1. hdfs 是什么
+
+Hadoop 自带的一个分布式文件系统,Hadoop Distribut File System 
+流式数据访问模式来存储超大文件
+
+1. 超大文件  
+2. 流式数据访问 一次写入、多次读取
+3. 商用硬件廉价的机器上
+4. 不支持低延迟，如果需要，使用Hbase
+5. 不适合大量小文件 对namenode压力太大
+6. 只支持单用户写入,只支持添加到末尾
+
+## 2. hdfs 的数据压缩算法
 
 使用压缩的优点如下：
 
@@ -29,7 +41,7 @@ Hadoop **对于压缩格式的是自动识别** 。如果我们压缩的文件�
 
 [HADOOP与HDFS数据压缩格式 - 简书](https://www.jianshu.com/p/b50bc3f8819c)
 
-## 2 ~~文件大小默认为 64M，改为 128M 有啥影响~~ bloack大小为什么增大默认为128M
+## 3. ~~文件大小默认为 64M，改为 128M 有啥影响~~ bloack大小为什么增大默认为128M
 
 1. 减轻了namenode的压力
   原因是hadoop集群在启动的时候，datanode会上报自己的block的信息给namenode。namenode把这些信息放到内存中。那么如果块变大了，那么namenode的记录的信息相对减少，所以namenode就有更多的内存去做的别的事情，使得整个集群的性能增强。
@@ -40,21 +52,22 @@ Hadoop **对于压缩格式的是自动识别** 。如果我们压缩的文件�
 3. 参考
    1. [Hadoop-2.X中HDFS文件块bloack大小为什么增大默认为128M-Hadoop|YARN-about云开发-活到老 学到老](http://www.aboutyun.com/thread-7514-1-1.html)
 
-## 3 讲述HDFS上传文件和读文件的流程？
+## 4. 讲述HDFS上传文件和读文件的流程？
 
-## 3.1 读数据流程
+## 1 读数据流程
 
 ![image](http://static.lovedata.net/jpg/2018/5/31/459e0d017d85b47b3e1380b1985d2225.jpg)
 
 1. 客户端(Client)调用FileSystem的open()函数打开文件。
-2. DistributeFileSystem通过RPC调用元数据节点，得到文件的数据块信息。 **对于每一个数据块，元数据节点返回数据块的数据节点位置。**
-3. DistributedFileSystem返回FSDataInputStream给客户端，用来读取数据。客户端调用stream的read()方法读取数据。
-4. FSDataInputStream连接保存此文件第一个数据块的 **最近的数据节点** ，Data从数据节点读到客户端(Client)。
-5. 当此数据块读取完毕后，FSDataInputStream关闭和此数据节点的连接，然后读取保存下一个数据块的最近的数据节点。
-6. 当数据读取完毕后，调用FSDataInputStream的close()函数。
-7. 在数据读取过程中，如果客户端在与数据节点通信时出现错误， **则会尝试读取包含有此数据块的下一个数据节点** ，并且失败的数据节点会被记录，以后不会再连接
+2. DistributeFileSystem通过RPC调用元数据节点，得
+3. 到文件的数据块信息。 **对于每一个数据块，元数据节点返回数据块的数据节点位置。**
+4. DistributedFileSystem返回FSDataInputStream给客户端，用来读取数据。客户端调用stream的read()方法读取数据。
+5. FSDataInputStream连接保存此文件第一个数据块的 **最近的数据节点** ，Data从数据节点读到客户端(Client)。
+6. 当此数据块读取完毕后，FSDataInputStream关闭和此数据节点的连接，然后读取保存下一个数据块的最近的数据节点。
+7. 当数据读取完毕后，调用FSDataInputStream的close()函数。
+8. 在数据读取过程中，如果客户端在与数据节点通信时出现错误， **则会尝试读取包含有此数据块的下一个数据节点** ，并且失败的数据节点会被记录，以后不会再连接
 
-## 3.2 写数据流程
+## 2 写数据流程
 
 ![image](http://static.lovedata.net/jpg/2018/5/31/3d11422458fe21f376f2f478a7bf1073.jpg)
 
@@ -70,18 +83,22 @@ Hadoop **对于压缩格式的是自动识别** 。如果我们压缩的文件�
 
 1. [HDFS文件读取、写入过程详解 - CSDN博客](https://blog.csdn.net/xu__cg/article/details/68106221)
 
-## 4 HDFS在上传文件的时候，如果其中一个块突然损坏了怎么办？（读取文件的异常处理）
+## 5. HDFS在上传文件的时候，如果其中一个块突然损坏了怎么办？（读取文件的异常处理）
 
 [HDFS 异常处理与恢复 - mindwind - 博客园](https://www.cnblogs.com/mindwind/p/4833098.html)
 
-## 5 HDFS和HBase各自使用场景
+## 6. HDFS NameNode 和 DataNode 之间是如何通信，如何协作的？
+
+client和namenode之间是通过rpc通信；
+datanode和namenode之间是通过rpc通信；
+client和datanode之间是通过简单的socket通信;
+
+## 7. HDFS和HBase各自使用场景
 
 HBase作为面向列的数据库运行在HDFS之上，HDFS缺乏随即读写操作，HBase正是为此而出现,以键值对的形式存储。项目的目标就是快速在主机内数十亿行数据中定位所需的数据并访问它。
 HBase是一个数据库，一个NoSql的数据库，像其他数据库一样提供随即读写功能，Hadoop不能满足实时需要，HBase正可以满足。如果你需要实时访问一些数据，就把它存入HBase
 
-## 6 HDFS NameNode 和 DataNode 之间是如何通信，如何协作的？
-
-### 什么场景下应用Hbase
+### 8. 什么场景下应用Hbase
 
 1. 成熟的数据分析主题，查询模式已经确立，并且不会轻易改变。
 2. 传统的关系型数据库已经无法承受负荷，高速插入，大量读取。
@@ -131,9 +148,29 @@ HDFS适合存储半结构化和非结构化数据，若有严格的结构化数�
 2. [（第3篇）HDFS是什么？HDFS适合做什么？我们应该怎样操作HDFS系统？ - 何石-博客 - 博客园](https://www.cnblogs.com/shijiaoyun/p/6761637.html)
 3. [hbase常识及habse适合什么场景 - 天下尽好 - 博客园](https://www.cnblogs.com/Little-Li/p/7878219.html)
 
-## 6 Hadoop namenode的ha，主备切换实现原理，日志同步原理，QJM中用到的分布式一致性算法（就是paxos算法）
+## 9. Hadoop namenode的ha，主备切换实现原理，日志同步原理，QJM中用到的分布式一致性算法（就是paxos算法）
 
-## 7 为什么HDFS 块为64MB或者128MB
+### 9.1 联邦HDFS
+
+2.x 引入联邦HDFS，加入多个namenode，m每个namenode管理文件系统空间的一部分，m每个nn管理y一个命名空间卷(namespace volume) 由命名空间卷的原数据和一个 data pool 数据池组成。数据池包含该命名空间下的所有数据块
+
+### 9.2 namenode 宕机后，新的namenode恢复要做的操作
+
+1. 将命名空间的映像导入到内存中
+2. 重演编辑日志
+3. 接受足够多的datanode的数据库报告并退出安全模式。
+
+### 9.3 namenode 备用 HA
+
+![image](http://static.lovedata.net/jpg/2018/7/4/7a050172879277cd9604c7c9f917eb31.jpg)
+
+### 9.4 两种高可用性共享存储 NFS过滤器和QJM
+
+QJM  群体日志管理器（qurom journal manager） 专用HDFS实现，推荐适用，以一组日志节点（journal node）形式运行，每次编辑必须写入多数日志节点，没有适用ZK HDFS namenode 选举时候用到ZK
+
+系统中有一个故障转移i控制器（failover controller） 新尸体，管理活动nn转移为备用nn过程，多种控制器，默认适用ZK，确保只有一个nn，每个nn运行一个轻量级 控制器，见识宿主nn是否失效，并在nn失效的时候故障切换
+ 
+## 10 为什么HDFS 块为64MB或者128MB
 
 为了最小化寻址爱笑，hdfs寻址包括磁盘寻到开销，数据块定位开销 ，设计较大的块，可以把上述寻址开销分摊到较多的数据中，降低开销 
 采用抽象的块概念有几个好处
@@ -142,8 +179,7 @@ HDFS适合存储半结构化和非结构化数据，若有严格的结构化数�
 2. 简化系统设计  方便元数据管理
 3. 适合数据备份
 
-
-## 8 名称节点 数据节点 和 SecondaryNameNOde
+## 11. 名称节点 数据节点 和 SecondaryNameNOde
 
 名称节点
 

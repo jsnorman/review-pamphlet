@@ -9,3 +9,4 @@
 3. [阿里，网易 云音乐以及商汤科技的大数据面试经-](https://app.yinxiang.com/shard/s24/nl/6616351/8c76e6b9-641b-4055-aa74-fa776239bc8d)
 4. [面试题--精选Hadoop选择题 - CSDN博客](https://blog.csdn.net/zhongqi2513/article/details/78349083)
 5. [hadoop面试题 - 豆丁网](http://www.docin.com/p-1443821582.html)
+6. [大数据常见算法题 - CSDN博客](https://blog.csdn.net/u014686180/article/details/52415152)
