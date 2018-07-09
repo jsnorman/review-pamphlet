@@ -253,3 +253,263 @@ AOP
 ![image](http://static.lovedata.net/jpg/2018/7/3/b321fc7ee4289500327678791bb9f947.jpg)
 
 AOP 通过（动态）代理机制可以让开发者从这些繁琐事项中抽身出来，大幅度提高了代码的抽象程度和复用度。从逻辑上来说，我们在软件设计和实现中的类似代理，如 Facade、Observer 等很多设计目的，都可以通过动态代理优雅地实现。
+
+## 21. java 左移、右移、无符号位移的原理
+
+参考
+[Java中>>和>>>的区别 - belief01 - 博客园](https://www.cnblogs.com/565261641-fzh/p/7686757.html)
+
+[Java的位运算符详解实例——与（&）、非（~）、或（|）、异或（^） - 菜的一笔的程序员 - 博客园](https://www.cnblogs.com/lichengze/p/5713409.html)
+
+![image](http://static.lovedata.net/jpg/2018/7/9/27dab01f11e1862420683fa319384520.jpg)
+
+在这6种操作符，只有~取反是单目操作符，其它5种都是双目操作符。
+位操作只能用于整形数据，对float和double类型进行位操作会被编译器报错
+
+右移 31位相当取符号位。 2 >> 31  -> 0 （证书为0，负数为1）
+右移 32位相当于什么都不做。 2 >> 32  -> 2
+右移 33位相当于右移1位。  2 >> 33  -> 1
+右移 34位相当于右移2位。   2 >> 34  -> 0
+
+```java
+public class DisplacementDemo {
+    public static void main(String[] args) {
+        printBinary("4", 4);
+        System.out.println("右移");
+        printBinary("4 >> 1", 4 >> 1);
+        printBinary("4 >> 2", 4 >> 2);
+        printBinary("-4 >> 2", -4 >> 2);
+        printBinary("4 >> 3", 4 >> 3);
+        printBinary("4 >> 4", 4 >> 4);
+        System.out.println("左移");
+        printBinary("4 << 2", 4 << 1);
+        printBinary("4 << 2", 4 << 2);
+        printBinary("4 << 2", 4 << 3);
+        //无符号位移
+        System.out.println("无符号右移");
+        //对于正数而言，>>和>>>没区别。
+        printBinary("4 >>> 1", 4 >>> 1);
+        System.out.println("无符号左移");
+        // 对于负数而言,结果是2147483647（Integer.MAX_VALUE）
+        printBinary("-4 >>> 1", -4 >>> 1);
+    }
+
+    private static void printBinary(String msg, int a) {
+        System.out.println("["+msg + "] : " + a + " -> " + Integer.toBinaryString(a));
+    }
+}
+/**Result:
+[4] : 4 -> 100
+右移
+[4 >> 1] : 2 -> 10
+[4 >> 2] : 1 -> 1
+[-4 >> 2] : -1 -> 11111111111111111111111111111111
+[4 >> 3] : 0 -> 0
+[4 >> 4] : 0 -> 0
+左移
+[4 << 2] : 8 -> 1000
+[4 << 2] : 16 -> 10000
+[4 << 2] : 32 -> 100000
+无符号右移
+[4 >>> 1] : 2 -> 10
+无符号左移
+[-4 >>> 1] : 2147483646 -> 1111111111111111111111111111110
+**/
+```
+
+左移没有<<<运算符！
+0是正数，1是负数
+要判断两个数符号是否相同时，可以这么干：
+return ((a >> 31) ^ (b >> 31)) == 0;
+
+```java
+public class BitLogicDemo {
+
+    public static void main(String[] args) {
+        System.out.println(compareIntSymbol(3, -4));
+    }
+
+    private static boolean compareIntSymbol(int a, int b) {
+        System.out.println(a >> 31); //0
+        System.out.println(b >> 31);//-1
+        // 要判断两个数符号是否相同时，可以这么干：
+        return ((a >> 31) ^ (b >> 31)) == 0;
+    }
+}
+/** result
+0
+-1
+false
+**/
+```
+
+## 22. 位移操作的应用
+
+[位操作基础篇之位操作全面总结 - CSDN博客]
+(https://blog.csdn.net/morewindows/article/details/7354571)
+
+[Java位操作方法，位运算实际应用(简单总结) -  - ITeye博客](http://longshaojian.iteye.com/blog/1946865)
+
+### 22.1 奇偶判断
+
+```java
+ /**
+     * 奇偶判断
+     */
+    private static void oddEven() {
+        printBinary("3", 3);
+        printBinary("4", 4);
+        printBinary("7", 7);
+        printBinary("8", 8);
+
+        printBinary("-4", -4);
+        printBinary("1", 1);
+        //因为奇数的最后一位是1，而1的最后一位是1，所以奇数 & 1 结果为1
+        //因为偶数的最后一位是0，而1的最后一位是1，所以偶数 & 1 结果为0
+        // 因此可以用if ((a & 1) == 0)代替if (a % 2 == 0)来判断a是不是偶数。
+        printBinary("3 & 1", 3 & 1);
+        printBinary("4 & 1", 4 & 1);
+    }
+
+    private static void printBinary(String msg, int a) {
+        System.out.println("[" + msg + "] : " + a + " -> " + Integer.toBinaryString(a));
+    }
+/**
+[3] : 3 -> 11
+[4] : 4 -> 100
+[7] : 7 -> 111
+[8] : 8 -> 1000
+[-4] : -4 -> 11111111111111111111111111111100
+[1] : 1 -> 1
+[3 & 1] : 1 -> 1
+[4 & 1] : 0 -> 0
+**
+```
+
+## 22.2 数字交换
+
+```java
+ public static void Swap(int a, int b) {
+        if (a != b) {
+            a ^= b;
+            b ^= a;
+            a ^= b;
+        }
+        //由于传递的只是一个副本，所以不会对他进行修改
+        System.out.println(a + " " + b);
+    }
+```
+
+## 22.3 变换正负数
+
+```java
+   public static void main(String[] args) {
+        oddEven();
+        Swap(12, 14);
+        System.out.println(signReversal(12));
+    }
+
+    private static int signReversal(int i) {
+        System.out.println("---signReversal---");
+        printBinary("i", i);
+        printBinary("i", ~i);
+        printBinary("~i + 1", ~i + 1);
+        return ~i + 1;
+    }
+
+/***
+---signReversal---
+[i] : 12 -> 1100
+[i] : -13 -> 11111111111111111111111111110011
+[~i + 1] : -12 -> 11111111111111111111111111110100
+-12
+**/
+```
+
+## 22.4 求绝对值
+
+```java
+ public static int abs(int a) {
+        System.out.println("---abs---");
+        int i = a >> 31;
+        printBinary("i", i);
+        //位操作也可以用来求绝对值，对于负数可以通过对其取反后加1来得到正数
+        return i == 0 ? a : ~a + 1;
+    }
+
+    public static int abs2(int a) {
+        System.out.println("---abs2---");
+        int i = a >> 31;
+        return ((a ^ i) - i);
+    }
+/**
+---abs---
+[i] : -1 -> 11111111111111111111111111111111
+1
+**/
+```
+
+## 23. BitSet 的原理？
+
+[【JAVA】BitSet的源码研究 - CSDN博客](https://blog.csdn.net/wxwzy738/article/details/8879423)
+[Java BitSet使用场景和示例 - 温布利往事 - 博客园](https://www.cnblogs.com/xujian2014/p/5491286.html)
+
+```java
+ private static void testSetGetClear() {
+        System.out.println("----set----");
+        long[] words = new long[3];
+        words[0] |= (1L << 3);
+        System.out.println(Arrays.toString(words));
+        System.out.println("----get----");
+        System.out.println(((words[0] & (1L << 3)) != 0));
+
+        words[0] |= (1L << 4);
+        System.out.println(Arrays.toString(words));
+
+        printBinary("1L", 1L);
+        printBinary("3", 3);
+        printBinary("3", 4);
+        printBinary("2", 2);
+        printBinary("1L<<2", 1L << 2);
+
+        printBinary("24", words[0]);
+        printBinary("1L<<3", 1L << 3);
+
+        System.out.println(((words[0] & (1L << 3)) != 0));
+        System.out.println(((words[0] & (1L << 4)) != 0));
+        System.out.println(((words[0] & (1L << 5)) != 0));
+
+        // 核心在于 一个数在求或（两个数都为0的时候才为0）之后，拿结果在求与，结果肯定是不为0的，所以此时就能判断是否在这个bitset中
+        printBinary("10 | (1<<3)", 10 | (1 << 3));
+        printBinary("10 | (1<<4)", 10 | (1 << 4));
+        printBinary("26 & (1<<4)", 26 & (1 << 4));
+
+    }
+
+    private static void printBinary(String msg, long a) {
+        System.out.println("[" + msg + "] : " + a + " -> " + Long.toBinaryString(a));
+    }
+/**
+true
+true
+----set----
+[8, 0, 0]
+----get----
+true
+[24, 0, 0]
+[1L] : 1 -> 1
+[3] : 3 -> 11
+[3] : 4 -> 100
+[2] : 2 -> 10
+[1L<<2] : 4 -> 100
+[24] : 24 -> 11000
+[1L<<3] : 8 -> 1000
+true
+true
+false
+[10 | (1<<3)] : 10 -> 1010
+[10 | (1<<4)] : 26 -> 11010
+[26 & (1<<4)] : 16 -> 10000
+**/
+
+```
