@@ -166,43 +166,72 @@ InputFormat会在map操作之前对数据进行两方面的预处理
 
 ### 1.13 WritableComparator 如何使用
 
-## 3.YARN
+## 其他
 
-### 3.1 YARN的新特性
+### 简单概述hadoop中的角色的分配以及功能
 
-### 3.2 hadoop的调度策略的实现，你们使用的是那种策略，为什么？
+### hadoop的优化（性能调优）
 
-对一个资源管理系统而言，首先要定义出资源的种类，然后将每种资源量化，才能管理。这就是资源抽象的过程。
+[hadoop性能调优与运维 - CSDN博客](https://blog.csdn.net/hy245120020/article/details/75202058)
 
-Container
+### hadoop1与hadoop2的区别
 
-Container是RM分配资源的基本单位。每个Container包含特定数量的CPU资源和内存资源，用户的程序运行在Container中，有点类似虚拟机。RM负责接收用户的资源请求并分配Container，NM负责启动Container并监控资源使用。如果使用的资源（目前只有内存）超出Container的限制，相应进程会被NM杀掉。
+[Hadoop1.X 与 Hadoop2.X区别及改进 - 奥斯卡影帝 - 博客园](https://www.cnblogs.com/douzhanshen/p/6582809.html)
 
-在YARN中，调度器是一个可插拔的组件，常见的有FIFO，CapacityScheduler，FairScheduler。可以通过配置文件选择不同的调度器。
+[Hadoop1.x与Hadoop2的区别 - Szz - 博客园](https://www.cnblogs.com/acSzz/p/5775593.html)
 
-FIFO
+Hadoop1.x的MapReduce框架的主要局限：
 
-最简单、也是默认的调度器。只有一个队列，所有用户共享。
-资源分配的过程也非常简单，先到先得，所以很容易出现一个用户占满集群所有资源的情况。
-可以设置ACL，但不能设置各个用户的优先级。
+（1）JobTracker 是 Map-reduce 的集中处理点，存在单点故障；
 
-优点是简单好理解，缺点是无法控制每个用户的资源使用。
-一般不能用于生产环境中。
+（2）JobTracker 完成了太多的任务，造成了过多的资源消耗，当 map-reduce job 非常多的时候，会造成很大的内存开销，潜在来说，也增加了 JobTracker 失效的风险，这也是业界普遍总结出老 Hadoop 的 Map-Reduce 只能支持 4000 节点主机的上限；
 
-[YARN资源调度策略 // foolbear的冥想盆](http://jxy.me/2015/04/30/yarn-resource-scheduler/)
+Hadoop2中新方案：YARN+MapReduce
 
-需要熟悉下Yarn资源调度机制
+首先的不要被YARN给迷惑住了，它只是负责资源调度管理。而MapReduce才是负责运算的家伙，所以YARN  != MapReduce2. 
 
-### 3.3 画一个yarn架构图，及其通信流程；
+YARN 并不是下一代MapReduce（MRv2），下一代MapReduce与第一代MapReduce（MRv1）在编程接口、数据处理引擎（MapTask和ReduceTask）是完全一样的， 可认为MRv2重用了MRv1的这些模块，不同的是资源管理和作业管理系统，MRv1中资源管理和作业管理均是由JobTracker实现的，集两个功能于一身，而在MRv2中，将这两部分分开了。 其中，作业管理由ApplicationMaster实现，而资源管理由新增系统YARN完成，由于YARN具有通用性，因此YARN也可以作为其他计算框架的资源管理系统，不仅限于MapReduce，也是其他计算框架（例如Spark）的管理平台。
 
-## 4.其他
+该架构将JobTracker中的资源管理及任务生命周期管理（包括定时触发及监控），拆分成两个独立的服务， **用于管理全部资源的ResourceManager以及管理每个应用的ApplicationMaster，**  ResourceManager用于管理向应用程序分配计算资源，每个ApplicationMaster用于管理应用程序、调度以及协调
 
-### 4.1 简单概述hadoop中的角色的分配以及功能
+### hadoop3的新特性
 
-### 4.2 hadoop的优化（性能调优）
+[hadoop3.0新特性 - CSDN博客](https://blog.csdn.net/liu1390910/article/details/78825371)
+[Hadoop 3.x 新特性剖析系列1 - 哥不是小萝莉 - 博客园](https://www.cnblogs.com/smartloli/p/8827623.html)
 
-### 4.3 hadoop1与hadoop2的区别
+### hadoop中两个大表实现join的操作，简单描述？
 
-### 4.4 hadoop3的新特性
+### hadoop 是什么？
 
-### 4.5 hadoop中两个大表实现join的操作，简单描述？
+ 　Hadoop是在分布式服务器集群上存储海量数据并运行分布式分析应用的一个平台，其核心部件是HDFS与MapReduce
+
+  HDFS是一个分布式文件系统：传统文件系统的硬盘寻址慢，通过引入存放文件信息的服务器Namenode和实际存放数据的服务器Datanode进行串接。对数据系统进行分布式储存读取。
+  
+  MapReduce是一个计算框架：MapReduce的核心思想是把计算任务分配给集群内的服务器里执行。通过对计算任务的拆分（Map计算\Reduce计算）再根据任务调度器（JobTracker）对任务进行分布式计算。
+
+## 请写出以下执行命令
+
+1）杀死一个job?
+  yarn job -list
+  yarn application -kill jobId
+2) 删除hdfs上的/tmp/aaa目录
+  1) hadoop fs -rm hdfs://host:port/file /user/hadoop/emptydir 
+3 加入一个新的存储节点和删除一个计算节点需要刷新集群状态命令？
+
+## hadoop 集群 加入一个新的存储节点和删除一个计算节点需要刷新集群状态命令
+
+方式1：静态添加datanode，停止namenode方式
+
+1.停止namenode
+2.修改slaves文件，并更新到各个节点
+3.启动namenode
+4.执行hadoop balance命令。（此项为balance集群使用，如果只是添加节点，则此步骤不需要）
+
+方式2：动态添加datanode，不停namenode方式
+
+1.修改slaves文件，添加需要增加的节点host或者ip，并将其更新到各个节点
+2.在datanode中启动执行启动datanode命令。命令：sh hadoop-daemon.sh start datanode
+3.可以通过web界面查看节点添加情况。或使用命令：sh hadoop dfsadmin -report
+4.执行hadoop balance命令。（此项为balance集群使用，如果只是添加节点，则此步骤不需要）
+
+[hadoop 集群 加入一个新的存储节点和删除一个计算节点需要刷新集群状态命令 - CSDN博客](https://blog.csdn.net/iwantknowwhat/article/details/50822316)

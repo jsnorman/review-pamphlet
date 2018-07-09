@@ -131,8 +131,41 @@
 
 [Java 重写(Override)与重载(Overload) | 菜鸟教程](http://www.runoob.com/java/java-override-overload.html)
 
+## 16. Exception和Error有什么区别？
 
-## 16 强引用、软引用、弱引用、幻象引用有什么区别？
+[欢迎回来](https://app.yinxiang.com/shard/s19/nl/3013102/138ba717-51ee-4052-abe3-eac3f4390ad0)
+
+Exception 和 Error 都是继承了 Throwable 类，在 Java 中只有 Throwable 类型的实例才可以被抛出（throw）或者捕获（catch），它是异常处理机制的基本组成类型。
+
+Exception 和 Error 体现了 Java 平台设计者对不同异常情况的分类。
+
+Exception 是程序正常运行中，可以预料的意外情况，可能并且应该被捕获，进行相应处理。
+Error 是指在正常情况下，不大可能出现的情况，绝大部分的 Error 都会导致程序（比如 JVM 自身）处于非正常的、不可恢复状态。既然是非正常情况，所以不便于也不需要捕获，常见的比如 OutOfMemoryError 之类，都是 Error 的子类。
+
+Exception 又分为可检查（checked）异常和不检查（unchecked）异常，可检查异常在源代码里必须显式地进行捕获处理，这是编译期检查的一部分。
+前面我介绍的不可查的 Error，是 Throwable 不是 Exception。
+不检查异常就是所谓的运行时异常，类似 **NullPointerException、ArrayIndexOutOfBoundsException** 之类，通常是可以编码避免的逻辑错误，具体根据需要来判断是否需要捕获，并不会在编译期强制要求。
+
+Checked Exception，因为这种类型设计的初衷更是为了从异常情况恢复，作为异常设计者，我们往往有充足信息进行分类
+
+从性能角度来审视一下 Java 的异常处理机制，这里有两个可能会相对昂贵的地方：
+
+try-catch 代码段会产生额外的性能开销，或者换个角度说，它往往会影响 JVM 对代码进行优化，所以建议仅捕获有必要的代码段，尽量不要一个大的 try 包住整段的代码；与此同时，利用异常控制代码流程，也不是一个好主意，远比我们通常意义上的条件语句（if/else、switch）要低效。
+
+Java 每实例化一个 Exception，都会对当时的栈进行快照，这是一个相对比较重的操作。如果发生的非常频繁，这个开销可就不能被忽略了
+
+
+
+![image](http://static.lovedata.net/jpg/2018/7/3/0b7956b3f218e27a2f07ac5c8c95d6d3.jpg)
+
+## 17. NoClassDefFoundError 和 ClassNotFoundException 有什么区别
+
+[关于NoClassDefFoundError和ClassNotFoundException异常 - Think Different - ITeye博客](http://wxl24life.iteye.com/blog/1919359)
+
+[ClassNotFoundException和NoClassDefFoundError的区别 - 三郎 - 开源中国](https://my.oschina.net/jasonultimate/blog/166932)
+
+
+## 18 强引用、软引用、弱引用、幻象引用有什么区别？
 
 强引用（"Strong" Reference），就是我们最常见的普通对象引用，只要还有强引用指向一个对象，就能表明对象还“活着”，垃圾收集器不会碰这种对象
 
@@ -142,7 +175,7 @@
 
 ![image](http://static.lovedata.net/jpg/2018/7/3/53fd388e134a22f71ed12e1daa60db36.jpg)
 
-## 17.理解 Java 的字符串，String、StringBuffer、StringBuilder 有什么区别？
+## 19.理解 Java 的字符串，String、StringBuffer、StringBuilder 有什么区别？
 
 String 是 Java 语言非常基础和重要的类，提供了构造和管理字符串的各种基本逻辑。它是典型的 Immutable 类，被声明成为 final class，所有属性也都是 final 的。也由于它的不可变性，类似拼接、裁剪字符串等动作，都会产生新的 String 对象。由于字符串操作的普遍性，所以相关操作的效率往往对应用性能有明显影响。
 StringBuffer 是为解决上面提到拼接产生太多中间对象的问题而提供的一个类，它是 Java 1.5 中新增的，我们可以用 append 或者 add 方法，把字符串添加到已有序列的末尾或者指定位置。StringBuffer 本质是一个线程安全的可修改字符序列，它保证了线程安全，也随之带来了额外的性能开销，所以除非有线程安全的需要，不然还是推荐使用它的后继者，也就是 StringBuilder。
@@ -154,7 +187,7 @@ StringBuilder 在能力上和 StringBuffer 没有本质区别，但是它去掉�
 
 你可以看到，在 JDK 8 中，字符串拼接操作会自动被 javac 转换为 StringBuilder 操作，而在 JDK 9 里面则是因为 Java 9 为了更加统一字符串操作优化，提供了 StringConcatFactory，作为一个统一的入口。javac 自动生成的代码，虽然未必是最优化的，但普通场景也足够了，你可以酌情选择。
 
-## 18.  动态代理是基于什么原理？
+## 20.  动态代理是基于什么原理？
 
 那么，如何分类 Java 语言呢？通常认为，Java **是静态的强类型语言，但是因为提供了类似反射等机制** ，也具备了部分动态类型语言的能力。
 

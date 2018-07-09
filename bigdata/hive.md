@@ -8,6 +8,8 @@
 
 ## 4. Hive UDF 自定义函数  他们作用的数据范围是什么？
 
+[Hive自定义函数(UDF、UDAF) - CSDN博客](https://blog.csdn.net/scgaliguodong123_/article/details/46993005)
+
 ## 5. hive 动态分区是怎么回事？
 
 [hive动态分区插入实验 - CSDN博客](https://blog.csdn.net/wzy0623/article/details/50817883)
@@ -17,3 +19,7 @@
 ## 6. Hive：insert into table 与 insert overwrite table 区别 
 
 [Hive：insert into table 与 insert overwrite table 区别 - cctext - 博客园](https://www.cnblogs.com/yy3b2007com/p/7054128.html)
+
+
+
+
