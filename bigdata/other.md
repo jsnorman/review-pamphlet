@@ -64,3 +64,4 @@ HDFS配置  用了三十多T，总共100多T
 ![image](http://static.lovedata.net/jpg/2018/6/20/66636b505fa3a677c3dc213a0aac15c7.jpg)
 
 营销活动、内容、  渠道 ， 、受众
+
