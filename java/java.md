@@ -513,3 +513,152 @@ false
 **/
 
 ```
+
+## 23. java 自动拆箱和自动装箱（int 和 integer 有什么区别）？
+
+int 是我们常说的整形数字，是 Java 的 8 个原始数据类型（Primitive Types，boolean、byte 、short、char、int、float、double、long）之一。Java 语言虽然号称一切都是对象，但原始数据类型是例外。
+
+Integer 是 int 对应的包装类，它有一个 int 类型的字段存储数据，并且提供了基本操作，比如数学运算、int 和字符串之间转换等。在 Java 5 中，引入了自动装箱和自动拆箱功能（boxing/unboxing），Java 可以根据上下文，自动进行转换，极大地简化了相关编程。
+
+Java 平台为我们自动进行了一些转换，保证不同的写法在运行时等价，它们发生在编译阶段，也就是生成的字节码是一致的。
+
+像前面提到的整数，javac 替我们自动把装箱转换为 Integer.valueOf()，把拆箱替换为 Integer.intValue()，这似乎这也顺道回答了另一个问题，既然调用的是 Integer.valueOf，自然能够得到缓存的好处啊。
+
+![image](http://static.lovedata.net/jpg/2018/7/10/698703d8312e5f9955dd4ebcc5d5e749.jpg)
+
+Boolean，缓存了 true/false 对应实例，确切说，只会返回两个常量实例 Boolean.TRUE/FALSE。 
+Short，同样是缓存了 -128 到 127 之间的数值。
+Byte，数值有限，所以全部都被缓存。
+Character，缓存范围 '\u0000' 到 '\u007F'。
+
+int 装箱的时候是在缓存中拿的，Byte是全部放入缓存
+![image](http://static.lovedata.net/jpg/2018/7/10/6d1eb98e67efebd9786271275868a40a.jpg)
+
+Integer 会根据int的值得大小来做判断，如果在-128到127（这个值可以配置）之间，就从缓存里面取，否则new一个出来
+![image](http://static.lovedata.net/jpg/2018/7/10/9c58c021c8ca6d151a17ec6c1f01c438.jpg)
+
+建议避免无意中的装箱、拆箱行为，尤其是在性能敏感的场合，创建 10 万个 Java 对象和 10 万个整数的开销可不是一个数量级的，不管是内存使用还是处理速度，光是对象头的空间占用就已经是数量级的差距了
+
+使用原始数据类型、数组甚至本地代码实现等，在性能极度敏感的场景往往具有比较大的优势，用其替换掉包装类、动态数组（如 ArrayList）等可以作为性能优化的备选项
+
+Integer 等包装类，定义了类似 SIZE 或者 BYTES 这样的常量 保证了跨平台性  这种移植对于 Java 来说相对要简单些，因为原始数据类型是不存在差异的，这些明确定义在Java 语言规范里面，不管是 32 位还是 64 位环境，开发者无需担心数据的位数差异。
+
+如果有线程安全的计算需要，建议考虑使用类似 AtomicInteger、AtomicLong 这样的线程安全类。
+
+部分比较宽的数据类型，比如 float、double，甚至不能保证更新操作的原子性，可能出现程序读取到只更新了一半数据位的数值
+
+## 24. 对比Vector、ArrayList、LinkedList有何区别？
+
+[Java集合框架（Set与Map，HashSet与HashMap，TreeSet与TreeMap） - CSDN博客](https://blog.csdn.net/u013344815/article/details/49128315)
+
+都是List，也就是所谓的有序集合，因此具体功能也比较近似，比如都提供按照位置进行定位、添加或者删除的操作，都提供迭代器以遍历其内容等。但因为具体的设计区别，在行为、性能、线程安全等方面，表现又有很大不同
+
+Verctor 是 Java 早期提供的线程安全的动态数组 Vector 内部是使用对象数组来保存数据，可以根据需要自动的增加容量，当数组已满时，会创建新的数组，并拷贝原有数组数据
+
+ArrayList 是应用更加广泛的动态数组实现，它本身不是线程安全的，所以性能要好很多  Vector 在扩容时会提高 1 倍，而 ArrayList 则是增加 50%。
+
+LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的
+
+场景：
+
+1. Vector 和 ArrayList 作为动态数组，其内部元素以数组形式顺序存储的，所以非常适合随机访问的场合。除了尾部插入和删除元素，往往性能会相对较差，比如我们在中间位置插入一个元素，需要移动后续所有元素。
+2. 而 LinkedList 进行节点插入、删除却要高效得多，但是随机访问性能则要比动态数组慢。
+
+![image](http://static.lovedata.net/jpg/2018/7/10/cc1411bb7805906cdb5c4f7b068061aa.jpg)
+
+- List，也就是我们前面介绍最多的有序集合，它提供了方便的访问、插入、删除等操作。
+- Set，Set 是不允许重复元素的，这是和 List 最明显的区别，也就是不存在两个对象 equals 返回 true。我们在日常开发中有很多需要保证元素唯一性的场合。
+- Queue/Deque，则是 Java 提供的标准队列结构的实现，除了集合的基本功能，它还支持类似先入先出（FIFO， First-in-First-Out）或者后入先出（LIFO，Last-In-First-Out）等特定行为。这里不包括 BlockingQueue，因为通常是并发编程场合，所以被放置在并发包里。
+
+TreeSet 代码里实际默认是利用 TreeMap 实现的 Java 类库创建了一个 Dummy 对象“PRESENT”作为 value，然后所有插入的元素其实是以键的形式放入了 TreeMap 里面；同理，HashSet 其实也是以 HashMap 为基础实现的，原来他们只是 Map 类的马甲
+
+Set
+
+- TreeSet 支持自然顺序访问，但是添加、删除、包含等操作要相对低效（log(n) 时间）。
+- HashSet 则是利用哈希算法，理想情况下，如果哈希散列正常，可以提供常数时间的添加、删除、包含等操作，但是它不保证有序。
+- LinkedHashSet，内部构建了一个记录插入顺序的双向链表，因此提供了按照插入顺序遍历的能力，与此同时，也保证了常数时间的添加、删除、包含等操作，这些操作性能略低于 HashSet，因为需要维护链表的开销。
+
+
+## 25. LinkedHashSet 和 LinkedHashMap的区别
+
+[Java集合框架源码剖析：LinkedHashSet 和 LinkedHashMap - CarpenterLee - 博客园](https://www.cnblogs.com/CarpenterLee/p/5541111.html)
+
+至于下面为什么Hashmap输出的key是按照字母递增排序的，请看
+[Java遍历HashSet为什么输出是有序的](https://www.douban.com/note/596873407/)
+
+```java
+ public static void main(String[] args) {
+        //   LinkedHashMap的迭代输出的结果保持了插入顺序
+        System.out.println("---------LinkedHashMap---------");
+        LinkedHashMap<String, Integer> lmap = new LinkedHashMap();
+        lmap.put("b", 3);
+        lmap.put("a", 4);
+        lmap.put("e", 6);
+        for (Map.Entry<String, Integer> entry : lmap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        System.out.println("---------hashmap---------");
+        HashMap<String, Integer> hmap = new HashMap();
+        hmap.put("b", 3);
+        hmap.put("a", 4);
+        hmap.put("e", 6);
+        for (Map.Entry<String, Integer> entry : hmap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
+    /**
+---------LinkedHashMap---------
+b: 3
+a: 4
+e: 6
+---------hashmap---------
+a: 4
+b: 3
+e: 6
+    **/
+```
+
+## 26. HashSet 和 LinkedhashSet
+
+```java
+public class LinkedHashSetDemo {
+    public static void main(String[] args) {
+        System.out.println("---------LinkedHashSet---------");
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+        lhs.add("j");
+        lhs.add("e");
+        lhs.add("m");
+        lhs.add("c");
+        lhs.forEach(e-> System.out.println(e));
+
+        System.out.println("---------HashSet---------");
+        HashSet<String> hs = new HashSet<>();
+        hs.add("j");
+        hs.add("jc");
+        hs.add("e");
+        hs.add("m");
+        hs.add("ac");
+        hs.add("c");
+        hs.add("d");
+        hs.forEach(e-> System.out.println(e));
+    }
+}
+
+/**
+---------LinkedHashSet---------
+j
+e
+m
+c
+---------HashSet---------
+ac
+c
+d
+e
+jc
+j
+m
+**
+```
