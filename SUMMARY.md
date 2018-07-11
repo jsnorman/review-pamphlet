@@ -15,6 +15,7 @@
     * [Spark SQL](bigdata/spark/spark-sql.md)
   * [Flink](bigdata/flink.md)
   * [Impala](bigdata/impala.md)
+  * [数据挖掘](bigdata/数据挖掘.md)
   * [Kudu](bigdata/kudu.md)
   * [Kafka](bigdata/kafka.md)
   * [Zookeeper](bigdata/zookeeper.md)
