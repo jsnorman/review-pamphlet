@@ -662,3 +662,104 @@ j
 m
 **
 ```
+
+## 30 对比Hashtable、HashMap、TreeMap有什么不同？
+
+以键值对的形式存储和操作数据的容器类型
+
+Hashtable 是早期 Java 类库提供的一个哈希表实现，本身是同步的，不支持 null 键和值，由于同步导致的性能开销，所以已经很少被推荐使用。
+
+HashMap 是应用更加广泛的哈希表实现，行为上大致上与 HashTable 一致，主要区别在于 HashMap 不是同步的，支持 null 键和值等
+
+TreeMap 则是基于红黑树的一种提供顺序访问的 Map，和 HashMap 不同，它的 get、put、remove 之类操作都是 O（log(n)）的时间复杂度，具体顺序可以由指定的 Comparator 来决定，或者根据键的自然顺序来判断。
+
+![image](http://static.lovedata.net/jpg/2018/7/12/bb1636ca4d7e08da765b30822f66f580.jpg)
+
+## 31 HashMap 源码分析
+
+[Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 - ImportNew](http://www.importnew.com/28263.html)
+
+- HashMap 内部实现基本点分析。
+- 容量（capcity）和负载系数（load factor）。
+- 树化 。
+
+它可以看作是数组（Node[] table）和链表结合组成的复合结构，数组被分为一个个桶（bucket），通过哈希值决定了键值对在这个数组的寻址；哈希值相同的键值对，则以链表形式存储，你可以参考下面的示意图。这里需要注意的是，如果链表大小超过阈值（TREEIFY_THRESHOLD, 8），图中的链表就会被改造为树形结构。
+
+![image](http://static.lovedata.net/jpg/2018/7/12/8d86171c660f52d93358e9a8af8e5155.jpg)
+
+它并不是 key 本身的 hashCode，而是来自于 HashMap 内部的另外一个 hash 方法。注意，为什么这里需要将高位数据移位到低位进行异或运算呢？这是因为有些数据计算出的哈希值差异主要在高位，而 HashMap 里的哈希寻址是忽略容量以上的高位的，那么这种处理就可以有效避免类似情况下的哈希碰撞。
+
+### java7 HashMap
+
+![image](http://static.lovedata.net/jpg/2018/7/12/ca135927af830b28e5010dea44d8cfdf.jpg)
+
+capacity：当前数组容量，始终保持 2^n，可以扩容，扩容后数组大小为当前的 2 倍。
+loadFactor：负载因子，默认为 0.75。
+threshold：扩容的阈值，等于 capacity * loadFactor
+
+### Java8 HashMap
+
+Java8 对 HashMap 进行了一些修改，最大的不同就是利用了红黑树，所以其由 数组+链表+红黑树 组成。
+
+根据 Java7 HashMap 的介绍，我们知道，查找的时候，根据 hash 值我们能够快速定位到数组的具体下标，但是之后的话，需要顺着链表一个个比较下去才能找到我们需要的，时间复杂度取决于链表的长度，为 O(n)。
+
+为了降低这部分的开销，在 Java8 中，当链表中的元素超过了 8 个以后，会将链表转换为红黑树，在这些位置进行查找的时候可以降低时间复杂度为 O(logN)。
+
+![image](http://static.lovedata.net/jpg/2018/7/12/3d41215e962ff43cf808fd88149317a8.jpg)
+
+Java7 中使用 Entry 来代表每个 HashMap 中的数据节点，Java8 中使用 Node，基本没有区别，都是 key，value，hash 和 next 这四个属性，不过，Node 只能用于链表的情况，红黑树的情况需要使用 TreeNode。
+
+## 32 ConcurrentHashMap  源码分析
+
+![image](http://static.lovedata.net/jpg/2018/7/12/aba4f22eab5917cc79ed13a740687400.jpg)
+
+concurrencyLevel：并行级别、并发数、Segment 数，怎么翻译不重要，理解它。默认是 16，也就是说 ConcurrentHashMap 有 16 个 Segments，所以理论上，这个时候，最多可以同时支持 16 个线程并发写，只要它们的操作分别分布在不同的 Segment 上。这个值可以在初始化的时候设置为其他值，但是一旦初始化以后，它是不可以扩容的。
+
+其实每个 Segment 很像之前介绍的 HashMap，不过它要保证线程安全
+
+initialCapacity：初始容量，这个值指的是整个 ConcurrentHashMap 的初始容量，实际操作的时候需要平均分给每个 Segment。
+loadFactor：负载因子，之前我们说了，Segment 数组不可以扩容，所以这个负载因子是给每个 Segment 内部使用的
+
+## 33 Java提供了哪些IO方式？ NIO如何实现多路复用？
+
+Java IO 方式有很多种，基于不同的 IO 抽象模型和交互方式，可以进行简单区分。
+首先，传统的 java.io 包，它基于流模型实现，提供了我们最熟知的一些 IO 功能，比如 File 抽象、输入输出流等。交互方式是同步、阻塞的方式，也就是说，在读取输入流或者写入输出流时，在读、写动作完成之前，线程会一直阻塞在那里，它们之间的调用是可靠的线性顺序。
+java.io 包的好处是代码比较简单、直观，缺点则是 IO 效率和扩展性存在局限性，容易成为应用性能的瓶颈。
+很多时候，人们也把 java.net 下面提供的部分网络 API，比如 Socket、ServerSocket、HttpURLConnection 也归类到同步阻塞 IO 类库，因为网络通信同样是 IO 行为。
+
+第二，在 Java 1.4 中引入了 NIO 框架（java.nio 包），提供了 Channel、Selector、Buffer 等新的抽象，可以构建多路复用的、同步非阻塞 IO 程序，同时提供了更接近操作系统底层的高性能数据操作方式。
+
+第三，在 Java 7 中，NIO 有了进一步的改进，也就是 NIO 2，引入了异步非阻塞 IO 方式，也有很多人叫它 AIO（Asynchronous IO）。异步 IO 操作基于事件和回调机制，可以简单理解为，应用操作直接返回，而不会阻塞在那里，当后台处理完成，操作系统会通知相应线程进行后续工作。
+
+![image](http://static.lovedata.net/jpg/2018/7/12/0227b399a0f653c26f1c9f5bb7575ca3.jpg)
+
+## 34. wait，notify，notifyAll方法是什么？
+
+![image](http://static.lovedata.net/jpg/2018/7/13/527f0cb9c21af6c549f7b5a2cc371603.jpg)
+
+## 35. 什么时候会发生死锁
+
+![image](http://static.lovedata.net/jpg/2018/7/13/1e38ba0b83326905e5c011092cfd9e62.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/97fd0df8c04ecf7a313d44ea29476227.jpg)
+
+## 36. long 和 double 的操作是原子性的吗？
+
+不是。
+
+![image](http://static.lovedata.net/jpg/2018/7/13/c3b077ccefcf71805bf8e9afba779242.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/e99e113e3fa491bc2c31435c86ce9610.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/d42a86d6b81a264e2877282d203d6610.jpg)
+
+---
+总结：
+
+![image](http://static.lovedata.net/jpg/2018/7/13/d25de1a66ed9e468b5eb3fb749b25fc0.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/290e79020a46ee7576e1e9cba73d2d0a.jpg)
+
+---
+
+Semaphore 表示信号量 permits t通过构造函数指定。accquire 获取资源，release 释放资源。如果有accquire资源等待，则会被唤醒。

@@ -82,3 +82,13 @@ CAS，Check and Set 。乐观锁实现使用Redis 自有的watch multi exec等�
 ![image](http://static.lovedata.net/jpg/2018/6/22/ef00eec0c7f656b24f0e120aa54a6e78.jpg)
 
 [Redis所需内存 超过可用内存怎么办 - 坦荡 - 博客园](https://www.cnblogs.com/tdws/p/5727633.html)
+
+## 7. Redis 中 String 类型可以容纳的最大数据长度
+
+项目中使用redis存储，key-value方式，在Redis中字符串类型的Value最多可以容纳的数据长度是512M
+官方信息:
+A String value can be at max 512 Megabytes in length.
+
+![image](http://static.lovedata.net/jpg/2018/7/12/94588e9b96f8967a7b201047166c54af.jpg)
+
+[Redis 中 String 类型可以容纳的最大数据长度 - CSDN博客](https://blog.csdn.net/HeatDeath/article/details/80170303)
