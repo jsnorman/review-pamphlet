@@ -76,6 +76,14 @@
 1. yarn-client用于测试，因为他的Driver运行在本地客户端，会与yarn集群产生较大的网络通信，从而导致网卡流量激增；它的好处在于直接执行时，在本地可以查看到所有的log，方便调试；
 2. yarn-cluster用于生产环境，因为Driver运行在NodeManager，相当于一个ApplicationMaster，没有网卡流量激增的问题；缺点在于调试不方便，本地用spark-submit提交后，看不到log，只能通过yarn application_id这种命令来查看，很麻烦
 
+![image](http://static.lovedata.net/jpg/2018/7/16/b4e773e7305d67cf7f0f95475565e2b3.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/16/30a73b39fab370ec772c6a768bba0515.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/16/0fe9fe0e348a9ea7c258cdbe806610e7.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/16/87a6250639209f2a955781bfa8c5b8fd.jpg)
+
 ### 1.12.spark运行原理，从提交一个jar到最后返回结果，整个过程
 
 1. 用户通过spark-submit脚本提交应用。
