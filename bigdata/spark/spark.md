@@ -34,6 +34,8 @@
 
 ![image](http://static.lovedata.net/jpg/2018/6/14/cf900b9cbd52d3a84fd8f04dba7c199f.jpg)
 
+![image](http://static.lovedata.net/jpg/2018/7/13/f98a94e948fe9d9b63643db96606fab3.jpg)
+
 ### 1.4.spark如何保证宕机迅速恢复
 
 ### 1.5. RDD的原理以及持久化原理
@@ -105,6 +107,10 @@
 
 ### 1.13. spark的stage划分是怎么实现的？拓扑排序？怎么实现？还有什么算法实现？
 
+宽依赖就是stage划分的依据
+
+![image](http://static.lovedata.net/jpg/2018/7/13/5e1a7fa922dbf6c2d5e646071d1bcb47.jpg)
+
 ### 1.14. spark rpc，spark2.0为啥舍弃了akka，而用netty
 
 ### 1.15. spark的各种shuffle，与mapreduce的对比;
@@ -123,12 +129,30 @@
 
 ### 1.22. dagschedule、taskschedule、schedulebankend实现原理；
 
+![image](http://static.lovedata.net/jpg/2018/7/13/0d54689ccc31b5ded3369e8ae9656432.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/5ed17c17f013769c3defd665667653fe.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/c3df67b9b516c6bc25b7d4a70dfabcac.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/30383ea00b1199a91e48deb8b1b9563d.jpg)
+
+stage 划分
+
+![image](http://static.lovedata.net/jpg/2018/7/13/d48db9cdff54eb6cea4e1d9dcf0d7726.jpg)
+
+> 宽依赖就是认为是Dagd的分界线,或者说根据宽依赖将job分为不同的阶段（stage）
+
+![image](http://static.lovedata.net/jpg/2018/7/13/37054531f120f5531db40dcf90a03d13.jpg)
+
 ### 1.23. 宽依赖、窄依赖的概念？宽依赖、窄依赖的例子？以下图中所指的是何种依赖
 
 ![image](http://static.lovedata.net/jpg/2018/7/4/52cbbb0ea8777f912ef6f6383cc1f5eb.jpg)
 
 ![image](http://static.lovedata.net/jpg/2018/7/4/b2053b3741affbafd63dff5ca58ca0b7.jpg)
 ![image](http://static.lovedata.net/jpg/2018/6/22/cef170091c377f5f7840ca80a9f9287c.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/7/13/fddef8da2524d01a32515fd4a69837c9.jpg)
 
 ### 1.24. Spark数据倾斜，怎么定位、怎么解决（阿里）；
 
@@ -153,6 +177,10 @@
 ![spark结合yarn集群背后的运行流程](http://static.lovedata.net/jpg/2018/6/14/34668f2bad595ff835fdf0823dfb99c6.jpg)
 
 ![image](http://static.lovedata.net/jpg/2018/6/14/3a907f0488496c7a39fb6bec02966e25.jpg)
+
+### 1.28 spark task解析？
+
+![image](http://static.lovedata.net/jpg/2018/7/13/f243b2f1b3fae98fda495c5fc8fb3fea.jpg)
 
 ## 2 Spark 优化
 
@@ -200,3 +228,4 @@
 7. 解决方案七：使用随机前缀和扩容RDD进行join
 
 [Spark性能优化指南——高级篇 -](https://tech.meituan.com/spark-tuning-pro.html)
+
