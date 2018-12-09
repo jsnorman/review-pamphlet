@@ -194,6 +194,14 @@ stage 划分
 
 ![image](http://static.lovedata.net/jpg/2018/7/13/f243b2f1b3fae98fda495c5fc8fb3fea.jpg)
 
+
+### spark  集群 100g内存 有两百g文件，去读取，有什么问题。
+
+1. [内存有限的情况下 Spark 如何处理 T 级别的数据 - abcde - CSDN博客 ](https://blog.csdn.net/asdfsadfasdfsa/article/details/78606365)
+2. 只有在用户要求Spark cache该RDD，且storage level要求在内存中cache时，Iterator计算出的结果才会被保留，通过cache manager放入内存池
+
+
+
 ## 2 Spark 优化
 
 ### 2.1 reduceByKey或者aggregateByKey与groupByKey的区别？
