@@ -4,6 +4,8 @@
 
 ## 2. hive 如何调优
 
+[hql 调优](https://www.cnblogs.com/sandbank/p/6408762.html)
+
 ## 3. Hive UADF 聚合函数  
 
 ## 4. Hive UDF 自定义函数  他们作用的数据范围是什么？
