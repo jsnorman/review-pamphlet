@@ -8,7 +8,7 @@
 [Java 出现内存溢出的定位以及解决方案](https://www.cnblogs.com/zhchoutai/p/7270886.html "")
 
 
-## 线程间如何通讯
+## 2. 线程间如何通讯
 
 CountDownLatch 利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能了。
 
@@ -19,3 +19,6 @@ CyclicBarrier 字面意思回环栅栏，通过它可以实现让**一组线程�
 [Java 里如何实现线程间通信](http://www.importnew.com/26850.html)
 
 [java线程间通信](https://blog.csdn.net/u011514810/article/details/77131296)
+
+
+## 3. 进程间如何通讯 
