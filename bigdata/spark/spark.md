@@ -164,6 +164,10 @@ stage 划分
 
 ### 1.24. Spark数据倾斜，怎么定位、怎么解决（阿里）；
 
+[spark提交应用的全流程分析 - CSDN博客](https://www.cnblogs.com/LHWorldBlog/p/8506121.html)
+
+![【Spark篇】---Spark解决数据倾斜问题](http://static.lovedata.net/jpg/2018/6/14/a6f6512145359189c2a4e9f9afac7673.jpg)
+
 ### 1.25 spark有哪些组件？
 
 - master：管理集群和节点，不参与计算。
