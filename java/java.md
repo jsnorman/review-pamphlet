@@ -17,3 +17,5 @@ CyclicBarrier 字面意思回环栅栏，通过它可以实现让**一组线程�
 [Java并发编程：CountDownLatch、CyclicBarrier和Semaphore](https://www.cnblogs.com/dolphin0520/p/3920397.html)
 
 [Java 里如何实现线程间通信](http://www.importnew.com/26850.html)
+
+[java线程间通信](https://blog.csdn.net/u011514810/article/details/77131296)
