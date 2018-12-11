@@ -30,6 +30,10 @@
 
 ### 1.3. Spark的Shuffle原理及调优？
 
+1. Hash Based Shuffle  
+   shuffle read  shuffle writer  每个map 都需要为每个reducer 维护一个文件， 供 reducer 取来独缺，这就导致文件比较多  coslidate 减少了文件  通过 bucket 来维护 
+2. Sort Based Shuffle 
+
 [用实例说明Spark stage划分原理 - bonelee - 博客园](https://www.cnblogs.com/bonelee/p/6039469.html)
 
 ![image](http://static.lovedata.net/jpg/2018/6/14/cf900b9cbd52d3a84fd8f04dba7c199f.jpg)
