@@ -33,6 +33,10 @@
 1. Hash Based Shuffle  
    shuffle read  shuffle writer  每个map 都需要为每个reducer 维护一个文件， 供 reducer 取来独缺，这就导致文件比较多  coslidate 减少了文件  通过 bucket 来维护 
 2. Sort Based Shuffle 
+  1.1 引入，不会为每个reducer生成一个单独的文件，而是生成一个单独的文件，并且会生成一个Index文件，reducer  通过 shuffleblockmanager  去根据index 读取相应的文件
+  
+  
+ 
 
 [用实例说明Spark stage划分原理 - bonelee - 博客园](https://www.cnblogs.com/bonelee/p/6039469.html)
 
