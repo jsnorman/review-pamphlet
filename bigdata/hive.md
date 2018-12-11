@@ -24,5 +24,5 @@
 ## 7. Hive 开窗函数，With cube with rollup 等函数的使用
 
 
-
+## 8. Hive 累计积分函数怎么实现
 
