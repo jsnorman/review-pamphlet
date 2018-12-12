@@ -80,6 +80,13 @@
  
   真正开始执行Java程序代码，该步执行<clinit>方法根据代码赋值语句，对 类变量和其他资源  进行初始化赋值。
 
+
+[Java 对象生命周期和类生命周期 - huangzhen0914的专栏 - CSDN博客](https://blog.csdn.net/huangzhen0914/article/details/45172597)
+
+
+
+
+
 ## 15. jvm 对象生存周期
 
 在JVM运行空间中，对象的整个生命周期大致可以分为7个阶段：**创建阶段（Creation）、应用阶段（Using）、不可视阶段（Invisible）、不可到达阶段（Unreachable）、可收集阶段（Collected）、终结阶段（Finalized）与释放阶段（Free）**
