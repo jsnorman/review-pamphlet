@@ -268,8 +268,9 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/c6ac64c6a4cbadff6491d15bcdea800c.jpg)
 
+![image](http://static.lovedata.net/jpg/2018/12/12/a353213e310c66499b456986364763f7.jpg)
 
-
+缺点：
 
 
 
