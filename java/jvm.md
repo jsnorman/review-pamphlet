@@ -170,7 +170,11 @@ java类的生命周期就是指一个class文件从加载到卸载的全过程
 
 
 
+## 垃圾收集算法
 
+- 标记清除 
+
+![image](http://static.lovedata.net/jpg/2018/12/12/fafbedd2e250fb4452f065798a28a145.jpg)
 
 
 
