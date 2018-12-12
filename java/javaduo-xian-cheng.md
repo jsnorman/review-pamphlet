@@ -18,6 +18,17 @@ synchronize 原始是使用CPU悲观锁机制，独占所，独占所意味其�
 lock 是使用乐观锁，每次不加锁没有冲突去完成某项操作，如果因为冲突失败就充实  ，CAS compare and swap  。调用cpu特殊指令   ReentrantLock 获得锁的方法就是 compareAndSetState   是非阻塞算法。自动更新共享数据，检测到其他程序的干扰
 
 
+总结来说，Lock与synchronized有以下区别：
+
+Lock是一个接口，而synchronized是关键字。
+synchronized会自动释放锁，而Lock必须手动释放锁。
+Lock可以让等待锁的线程响应中断，而synchronized不会，线程会一直等待下去。
+通过Lock可以知道线程有没有拿到锁，而synchronized不能。
+Lock能提高多个线程读操作的效率。
+synchronized能锁住类、方法和代码块，而Lock是块范围内的
+
+![image](http://static.lovedata.net/jpg/2018/12/12/f203517265596470923384d842ecdf3a.jpg)
+
 ### 应用区别
 
 本身没什么区别，复杂同步应用中使用Lock，特别如下
