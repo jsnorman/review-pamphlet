@@ -284,5 +284,7 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/15e7e0314a394a761e3954eb36bc243f.jpg)
 
+## 20 什么是空间分配担保
 
+![image](http://static.lovedata.net/jpg/2018/12/12/242c969450458a11991a13bbbeddaf99.jpg)
 
