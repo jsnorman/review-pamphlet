@@ -88,7 +88,7 @@ java类的生命周期就是指一个class文件从加载到卸载的全过程
 ![image](http://static.lovedata.net/jpg/2018/12/12/8aaf390733737d3e1a054404ed9c6e6e.jpg)
 
 ### 加载
-
+就是找到需要加载的类并把类的信息加载到jvm的方法区中，然后在堆区中实例化一个java.lang.Class对象，作为方法区中这个类的信息的入口
 
 
 ## 15. jvm 对象生存周期
