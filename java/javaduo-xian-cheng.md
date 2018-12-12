@@ -2,6 +2,12 @@
 
 ## 1. lock 和 synchronize 的区别
 
+[Java从线程安全到Synchronize和Lock探索 - 千寻 - CSDN博客](https://blog.csdn.net/alex_xfboy/article/details/22810249)
+
+[synchronize和Lock锁的区别 - 不浪漫罪名的博客 - CSDN博客](https://blog.csdn.net/ji519974770/article/details/79736049)
+
+[深入研究 Java Synchronize 和 Lock 的区别与用法 - natian306的专栏 - CSDN博客](https://blog.csdn.net/natian306/article/details/18504111)
+
 ### 用法
 synchronized：在需要同步的对象中加入此控制，synchronized可以加在方法上，也可以加在特定代码块中，括号中表示需要锁的对象。
  
@@ -26,6 +32,7 @@ Lock可以让等待锁的线程响应中断，而synchronized不会，线程会�
 通过Lock可以知道线程有没有拿到锁，而synchronized不能。
 Lock能提高多个线程读操作的效率。
 synchronized能锁住类、方法和代码块，而Lock是块范围内的
+
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/f203517265596470923384d842ecdf3a.jpg)
 
