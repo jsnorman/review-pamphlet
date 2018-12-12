@@ -271,6 +271,8 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 ![image](http://static.lovedata.net/jpg/2018/12/12/a353213e310c66499b456986364763f7.jpg)
 
 缺点：
-
+- cms 对 cpu资源非常敏感
+- cms 无法处理浮动垃圾  收集过程中产生的垃圾，因此不能全部填满后才去收集，要预留一部分空间提供并发收集时程序运作使用  ![image](http://static.lovedata.net/jpg/2018/12/12/b6e120c59662b54cde73fec1dd31322a.jpg)
+- 是一中 标记清除 算法收集器。 大量碎片  
 
 
