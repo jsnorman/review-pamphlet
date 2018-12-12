@@ -1,6 +1,7 @@
-## 2 Spark 优化
 
-### 2.1 reduceByKey或者aggregateByKey与groupByKey的区别？
+# 2 Spark 优化
+
+## 2.1 reduceByKey或者aggregateByKey与groupByKey的区别？
 
 因为reduceByKey和aggregateByKey算子都会使用用户自定义的函数对每个节点本地的相同key进行预聚合。而groupByKey算子是不会进行预聚合的，全量的数据会在集群的各个节点之间分发和传输，性能相对来说比较差。
 
@@ -8,7 +9,7 @@
 
 ![image](http://static.lovedata.net/jpg/2018/6/14/31d0199949271ef1641a7be918818fcd.jpg)
 
-### 2.2 如何使用高性能的算子？
+## 2.2 如何使用高性能的算子？
 
 1. 使用reduceByKey/aggregateByKey替代groupByKey
 2. 使用mapPartitions替代普通map 可能出现OOM 因为可能一个分区数据量太大
@@ -20,7 +21,7 @@
 参考
 [Spark性能优化指南——基础篇 -](https://tech.meituan.com/spark-tuning-basic.html)
 
-### 2.3 Spark Shuffle 数据倾斜的解决方案
+## 2.3 Spark Shuffle 数据倾斜的解决方案
 
 1. 解决方案一：使用Hive ETL预处理数据 适用Hive join
 2. 解决方案二：过滤少数导致倾斜的key
