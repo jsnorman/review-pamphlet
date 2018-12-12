@@ -266,6 +266,10 @@ parallel scavenge 的老老年代版本，  使用多线程和标记整理算法
 
 concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目标的收集器  ，应用很多互联网站b/s系统上。重服务响应速度。希望停顿最短。
 
+![image](http://static.lovedata.net/jpg/2018/12/12/c6ac64c6a4cbadff6491d15bcdea800c.jpg)
+
+
+
 
 
 
