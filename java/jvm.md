@@ -251,7 +251,14 @@ Server模式下的虚拟机的首选新生代收集器
 ### serial old 收集器
 
 
-serial old 的老年代版本，单线程，标记整理
+serial old 的老年代版本，单线程，标记整理   client 模式下的虚拟机使用  
+![image](http://static.lovedata.net/jpg/2018/12/12/6774ec1979e2a185bda414c2776c671c.jpg)
+![image](http://static.lovedata.net/jpg/2018/12/12/8b351a1f6ac592a28e0f4121ba8a926d.jpg)
+
+
+
+
+
 
 
 
