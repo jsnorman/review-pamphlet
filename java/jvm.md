@@ -238,7 +238,7 @@ Server模式下的虚拟机的首选新生代收集器
 
 新生代收集器，不能与CMS配合，使用复制算法。又是并行多线程收集器。   特点 是关注点与其他不同。
 
-
+![image](http://static.lovedata.net/jpg/2018/12/12/f3471e9310ef4916eaece67d2421cc82.jpg)
 
 
 
