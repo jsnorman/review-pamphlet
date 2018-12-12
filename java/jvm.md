@@ -46,4 +46,8 @@
 2. Promotion Failure  假设此时设置XX:CMSInitiatingOccupancyFraction＝60，但是在已使用内存还没有达到总内存60%的时候，已经没有空间容纳从新生代迁移的对象了。oh，my god！怎么会这样？罪魁祸首就是内存碎片，上文中提到CMS算法会产生大量碎片，当碎片容量积累到一定大小之后就会造成上面的场景。这种场景下，CMS回收器一样会停止工作，进入漫长的 ’stop-the-world’ 模式。JVM也提供了参数   -XX: **UseCMSCompactAtFullCollection**  **来减少碎片的产生** ，这个参数表示会在每次CMS回收垃圾之后执行一次碎片整理，很显然，这个参数会对性能有比较大的影响，对HBase这种对延迟敏感的业务来说并不是一个完美解决方案。
 
 
+## 14. jvm 对象生存周期
+
+  
+
 
