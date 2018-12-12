@@ -21,6 +21,7 @@
   * [Kafka](bigdata/kafka.md)
   * [Zookeeper](bigdata/zookeeper.md)
   * [解决方案](bigdata/解决方案.md)
+  * [Flume](bigdata/flume.md)
 * [Java](java/java.md)
   * [JVM](java/jvm.md)
   * [Java编程题](java/编程题.md)
