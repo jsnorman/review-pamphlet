@@ -106,6 +106,7 @@
 ◆所有对该对象的引用全部是强引用（除非我们显式地使用了：软引用（Soft Reference）、弱引用（Weak Reference）或虚引用（Phantom Reference））。
 
 1．强引用   是指JVM内存管理器从根引用集合（Root Set）出发遍寻堆中所有到达对象的路径
+ 2．软引用
 
 
 
