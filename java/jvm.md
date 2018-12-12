@@ -240,10 +240,7 @@ Server模式下的虚拟机的首选新生代收集器
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/f3471e9310ef4916eaece67d2421cc82.jpg)
 
-
-
-
-
+![image](http://static.lovedata.net/jpg/2018/12/12/a1a2b5c27b109678da4b3edd808fa0fe.jpg)
 
 
 
