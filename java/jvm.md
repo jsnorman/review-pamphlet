@@ -223,7 +223,7 @@ java类的生命周期就是指一个class文件从加载到卸载的全过程
 ![image](http://static.lovedata.net/jpg/2018/12/12/c6770076a35478a2c988844e8d8b1f46.jpg)
 
 
-
+### ParNew 收集器 
 
 
 
