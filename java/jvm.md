@@ -83,10 +83,9 @@
 
 [Java 对象生命周期和类生命周期 - huangzhen0914的专栏 - CSDN博客](https://blog.csdn.net/huangzhen0914/article/details/45172597)
 
-
-![image](http://static.lovedata.net/jpg/2018/12/12/8aaf390733737d3e1a054404ed9c6e6e.jpg)
-
 java类的生命周期就是指一个class文件从加载到卸载的全过程
+一个java类的完整的生命周期会经历加载、连接、初始化、使用、和卸载五个阶段
+![image](http://static.lovedata.net/jpg/2018/12/12/8aaf390733737d3e1a054404ed9c6e6e.jpg)
 
 
 
