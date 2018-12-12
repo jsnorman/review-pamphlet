@@ -206,4 +206,7 @@ stage 划分
 2. 只有在用户要求Spark cache该RDD，且storage level要求在内存中cache时，Iterator计算出的结果才会被保留，通过cache manager放入内存池
 
 
+## spark 内存划分
+
+
 
