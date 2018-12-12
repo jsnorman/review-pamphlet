@@ -227,6 +227,8 @@ java类的生命周期就是指一个class文件从加载到卸载的全过程
 
 serial 收集器的错线程版本，除了使用多条线程进行垃圾收集以为，其他的配置参数，算法等都是完全一样的。
 
+Server模式下的虚拟机的首选新生代收集器
+
 ![image](http://static.lovedata.net/jpg/2018/12/12/6f954967a1bb847568f3374bf0eab9e6.jpg)
 
 
