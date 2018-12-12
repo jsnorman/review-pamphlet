@@ -85,7 +85,7 @@
 在JVM运行空间中，对象的整个生命周期大致可以分为7个阶段：**创建阶段（Creation）、应用阶段（Using）、不可视阶段（Invisible）、不可到达阶段（Unreachable）、可收集阶段（Collected）、终结阶段（Finalized）与释放阶段（Free）**
 
 
-
+创建阶段
 
 
 
