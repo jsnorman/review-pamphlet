@@ -213,6 +213,9 @@ java类的生命周期就是指一个class文件从加载到卸载的全过程
 ![image](http://static.lovedata.net/jpg/2018/12/12/a2913c9c9e424be314642359c9f58969.jpg)
 
 
+### Serial收集器 
+  最基本  新生代收集器  单线程 在收集时候必须暂停其他所有工作线程
+
 
 
 
