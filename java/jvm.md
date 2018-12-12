@@ -256,6 +256,9 @@ serial old 的老年代版本，单线程，标记整理   client 模式下的�
 ![image](http://static.lovedata.net/jpg/2018/12/12/8b351a1f6ac592a28e0f4121ba8a926d.jpg)
 
 
+### parallel old 收集器
+
+parallel scavenge 的老老年代版本，  使用多线程和标记整理算法  jdk 1.6 才开始提供的
 
 
 
