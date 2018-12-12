@@ -243,7 +243,8 @@ Server模式下的虚拟机的首选新生代收集器
 ![image](http://static.lovedata.net/jpg/2018/12/12/a1a2b5c27b109678da4b3edd808fa0fe.jpg)
 
 
-
+可以自适应调节
+![image](http://static.lovedata.net/jpg/2018/12/12/507edea817abde426515aabd7ce83e0f.jpg)
 
 
 
