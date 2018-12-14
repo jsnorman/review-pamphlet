@@ -307,5 +307,13 @@ BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到
 
  在compaction发生的时候才会实际删除数据 
  
+## 18 HBase什么时候作minor major compact
+
+
+
+
+
+
+ 
  
  
