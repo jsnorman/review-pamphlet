@@ -302,3 +302,10 @@ BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到
 1. BlockCache的内容
 
 ## 16. 行式存储和列式存储的优劣势？
+
+## 17. hbase 什么时候会物理删除数据
+
+ 在compaction发生的时候才会实际删除数据 
+ 
+ 
+ 
