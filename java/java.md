@@ -60,11 +60,22 @@
 
 ### 7.2 并发问题
 
-
+[深入理解HashMap - Java综合 - Java - ITeye论坛](https://www.iteye.com/topic/539465)
 hashmap的resize 
 当hashmap中的元素越来越多的时候，碰撞的几率也就越来越高（因为数组的长度是固定的），所以为了提高查询的效率，就要对hashmap的数组进行扩容，数组扩容这个操作也会出现在ArrayList中，所以这是一个通用的操作，很多人对它的性能表示过怀疑，不过想想我们的“均摊”原理，就释然了，而在hashmap数组扩容之后，最消耗性能的点就出现了：原数组中的数据必须重新计算其在新数组中的位置，并放进去，这就是**resize**。 
 
 那么hashmap什么时候进行扩容呢？当hashmap中的元素个数超过数组大小*loadFactor时，就会进行数组扩容，loadFactor的默认值为0.75，也就是说，默认情况下，数组大小为16，那么当hashmap中元素个数超过16*0.75=12的时候，就把数组的大小扩展为2*16=32
+
+[Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 - ImportNew](http://www.importnew.com/28263.html)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/14/2854dac13e5df27bd704b5ffa3a99dcb.jpg)
+
+
+[HashMap的死循环 - silyvin - CSDN博客](https://blog.csdn.net/silyvin/article/details/79102415)
+
+
+
 
 
 ## 8. 了解LinkedHashMap的应用吗
@@ -72,6 +83,12 @@ hashmap的resize
 ## 9. 线程池实现原理，Lock机制的实现
 
 ## 10. ConcurrentHashMap深入分析
+
+[Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 - ImportNew](http://www.importnew.com/28263.html)
+
+
+
+
 
 ### 10.1 concurrenthashmap怎么实习同步？各个版本的实现方案？
 
