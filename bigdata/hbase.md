@@ -309,7 +309,28 @@ BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到
  
 ## 18 HBase什么时候作minor major compact
 
+HBase什么时候做minor major compact
+我们都知道compact分为两类，一类叫Minor compact ,一类叫Major compact,
+两者有什么区别呢？
+两者的区别在于：Minor compact只是进行文件merge操作，而Major compact除了做文件Merge操作，还会将其中的delete项删除。
 
+ 
+
+hbase为了防止小文件（被刷到磁盘的menstore）过多，以保证保证查询效率，hbase需要在必要的时候将这些小的store file合并成相对较大的store file，这个过程就称之为compaction。在hbase中，主要存在两种类型的compaction：minor compaction和major compaction。
+
+major compaction 的功能是将所有的store file合并成一个，触发major compaction的可能条件有：major_compact 命令、majorCompact() API、region server自动运行（相关参数：hbase.hregion.majoucompaction 默认为24 小时、hbase.hregion.majorcompaction.jetter 默认值为0.2 防止region server 在同一时间进行major compaction）。hbase.hregion.majorcompaction.jetter参数的作用是：对参数hbase.hregion.majoucompaction 规定的值起到浮动的作用，假如两个参数都为默认值24和0,2，那么major compact最终使用的数值为：19.2~28.8 这个范围。
+
+minor compaction的运行机制要复杂一些，它由一下几个参数共同决定：
+
+hbase.hstore.compaction.min :默认值为 3，表示至少需要三个满足条件的store file时，minor compaction才会启动
+
+hbase.hstore.compaction.max 默认值为10，表示一次minor compaction中最多选取10个store file
+
+hbase.hstore.compaction.min.size 表示文件大小小于该值的store file 一定会加入到minor compaction的store file中
+
+hbase.hstore.compaction.max.size 表示文件大小大于该值的store file 一定会被minor compaction排除
+
+hbase.hstore.compaction.ratio 将store file 按照文件年龄排序（older to younger），minor compaction总是从older store file开始选择，如果该文件的size 小于它后面hbase.hstore.compaction.max 个store file size 之和乘以 该ratio，则该store file 也将加入到minor compaction 中。
 
 
 
