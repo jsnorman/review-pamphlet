@@ -331,9 +331,11 @@ hbase.hstore.compaction.min.size 表示文件大小小于该值的store file 一
 hbase.hstore.compaction.max.size 表示文件大小大于该值的store file 一定会被minor compaction排除
 
 hbase.hstore.compaction.ratio 将store file 按照文件年龄排序（older to younger），minor compaction总是从older store file开始选择，如果该文件的size 小于它后面hbase.hstore.compaction.max 个store file size 之和乘以 该ratio，则该store file 也将加入到minor compaction 中。
+[HBase之MinorCompact全程解析 - 江河万川 - CSDN博客](https://blog.csdn.net/u014297175/article/details/50456147)
 
+![image](http://static.lovedata.net/jpg/2018/12/14/9af238ee5959a826cc476f284f2e78de.jpg)
 
-
+![image](http://static.lovedata.net/jpg/2018/12/14/d8c883d1e7ff259892382e221313a177.jpg)
 
  
  

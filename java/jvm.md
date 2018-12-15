@@ -288,3 +288,7 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/242c969450458a11991a13bbbeddaf99.jpg)
 
+## 21 什么时候会 stop the world
+
+[JVM GC中Stop the world案例实战 - Hipparchus的博客 - CSDN博客](https://blog.csdn.net/sinat_25306771/article/details/52374498)
+
