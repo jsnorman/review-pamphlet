@@ -219,3 +219,11 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/6/19/edfed7795fb19be856de49e138064267.jpg)
 ![image](http://static.lovedata.net/jpg/2018/6/19/179518a440011f913564852609cbf3e0.jpg)
 
+## 13. spark streaming 消费kafka数据如何保证extrat one 消费？
+
+
+
+
+
+
+
