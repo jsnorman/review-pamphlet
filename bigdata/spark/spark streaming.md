@@ -225,9 +225,21 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ## 14. ss 消费 kafka 如何保证有序？
 
 
-## 15 StreamingContext的 
+## 15 StreamingContext的作用
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/e0789f02a71f7efae3f7deac775045d3.jpg)
+
+## 16. ss 消费kafka 的两种方式？
+
+ 
+![image](http://static.lovedata.net/jpg/2018/12/15/bc7ad59d7e6ebfbe14040b26737c81e2.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/3ade13d676fc47859a9866c9fdb15f8b.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/89f84f1ead5f44a36a19be11d663f14a.jpg) 
+
+分区一对一
+
 
 
 
