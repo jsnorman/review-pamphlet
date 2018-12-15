@@ -246,7 +246,7 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ## 17. updatebykey 的作用？ 企业级应用？
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/2b180ce546cdfba708c5ee81aa928836.jpg)
-
+ 
 
 
 
