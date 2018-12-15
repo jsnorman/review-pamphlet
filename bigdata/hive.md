@@ -27,6 +27,8 @@
 
 ## 7. Hive 开窗函数，With cube with rollup 等函数的使用
 
+[Hive中with cube、with rollup、grouping sets用法 - 简书](https://www.jianshu.com/p/343a684fc7a2)
 
 ## 8. Hive 累计积分函数怎么实现
 
+[一文读懂Hive分析窗口函数（hive做累计、分组、排序、层次等计算） - abc200941410128的博客 - CSDN博客](https://blog.csdn.net/abc200941410128/article/details/78408942)
