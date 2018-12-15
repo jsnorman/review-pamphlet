@@ -222,6 +222,16 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ## 13. spark streaming 消费kafka数据如何保证extrat one 消费？
 
 
+## 14. ss 消费 kafka 如何保证有序？
+
+
+## 15 StreamingContext的 
+
+![image](http://static.lovedata.net/jpg/2018/12/15/e0789f02a71f7efae3f7deac775045d3.jpg)
+
+
+
+
 
 
 
