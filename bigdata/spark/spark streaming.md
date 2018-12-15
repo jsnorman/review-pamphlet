@@ -254,5 +254,40 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/12/15/edadea8ce32e016122c51ea0c8ce2fc2.jpg)
 
 
+## 19. spark streaming 的 缓存与持久化
+![image](http://static.lovedata.net/jpg/2018/12/15/a474432a64a9f3e6b5ab4206d6387fb2.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/ff2bcd7ff04e9e2b87c35d6c55e5e90f.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/0918c65d31e1659351070c0b1a5b43ac.jpg)
+![image](http://static.lovedata.net/jpg/2018/12/15/1dce16abf67cbc04ad9161794c706df4.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/14b370b55104ad918bdbec51c02238ac.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/96c5ae5214bc94482b674ab7107afffd.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/5d6ebc44f8c93dd2aa9073646a1f1f0f.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/d8b66b2802106dacbade5699ea257d78.jpg) 
+
+
+
+## 20. spark 应用部署，以及如何升级（优雅停止应用）
+
+![image](http://static.lovedata.net/jpg/2018/12/15/1f34b0cffe7f6b731e1727932464b779.jpg)
+
+[18 Spark Streaming程序的优雅停止 - 简书](https://www.jianshu.com/p/18cd94b5c647)
+
+
+[【实战篇】如何优雅的停止你的 Spark Streaming Application - 简书](https://www.jianshu.com/p/234c85f5ec3f)
+
+
+## 21. spark streaming 如何容错？保证数据不丢失？
+
+[Spark-Streaming容错机制学习 - 简书](https://www.jianshu.com/p/a108611129f5)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/2072e03e9eceef63086bbcb3482237ad.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/f940ffe07c4d67b91e5f7b6586fc24df.jpg)
 
 
