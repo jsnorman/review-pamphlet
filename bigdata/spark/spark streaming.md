@@ -220,12 +220,21 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/6/19/179518a440011f913564852609cbf3e0.jpg)
 
 ## 13. spark streaming 消费kafka数据如何保证extrat one 消费？
+[Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
 
 
+一般保存到 zk 是因为需要给 kafka 监控程序看，因为，spark 有自己的 checkpointdata，这个是保存下来的，不用担心哟    
+
+["Spark Streaming + Kafka direct + checkpoints + 代码改变"引发的问题 - 千淘万漉 - CSDN博客](https://blog.csdn.net/matrix_google/article/details/80033849)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/91eca7933a9000895e4975782d9504f6.jpg)
+[Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
+[Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
 ## 14. ss 消费 kafka 如何保证有序？
 
 
 ## 15 StreamingContext的作用
+
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/e0789f02a71f7efae3f7deac775045d3.jpg)
 
@@ -236,11 +245,16 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/3ade13d676fc47859a9866c9fdb15f8b.jpg)
 
-![image](http://static.lovedata.net/jpg/2018/12/15/89f84f1ead5f44a36a19be11d663f14a.jpg) 
+![image](http://static.lovedata.net/j[Spark Streaming消费Kafka Direct方式数据零丢失实现 - ChouYarn - 博客园](https://www.cnblogs.com/ChouYarn/p/6235823.html)pg/2018/12/15/89f84f1ead5f44a36a19be11d663f14a.jpg) 
+
+
 
 分区一对一
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/c0becce0a4322490837dfe2f4c03dbfe.jpg)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/15/91eca7933a9000895e4975782d9504f6.jpg)
 
 
 ## 17. updatebykey 的作用？ 企业级应用？
@@ -282,7 +296,7 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 [【实战篇】如何优雅的停止你的 Spark Streaming Application - 简书](https://www.jianshu.com/p/234c85f5ec3f)
 
 
-## 21. spark streaming 如何容错？保证数据不丢失？
+## 21. spark streaming 如何容错？保证数据不丢失？[Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
 
 [Spark-Streaming容错机制学习 - 简书](https://www.jianshu.com/p/a108611129f5)
 
@@ -300,3 +314,5 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/12/15/afebc0a731d2a1f86b2c403c51d604c0.jpg)
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/ad54f8f0c68c3f00c183b230fe5e904b.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/15/417ce39e1f1f4ebc88638aa322cdc9cd.jpg)
