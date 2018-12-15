@@ -257,6 +257,46 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/12/15/91eca7933a9000895e4975782d9504f6.jpg)
 
 
+![image](http://static.lovedata.net/jpg/2018/12/15/5b6de6ebb92175980262d4b341e6f3ed.jpg)
+
+参考这个
+
+[sparkstreaming读取kafka的两种方式 - gongpulin的博客 - CSDN博客](https://blog.csdn.net/gongpulin/article/details/77619771)
+
+
+Receive_base VS   Direct两种方式的优缺点：
+Direct方式具有以下方面的优势：
+1、简化并行(Simplified Parallelism)。不现需要创建以及union多输入源，Kafka topic的partition与RDD的partition一一对应
+2、高效(Efficiency)。Receiver-based保证数据零丢失(zero-data loss)需要配置spark.streaming.receiver.writeAheadLog.enable,此种方式需要保存两份数据，浪费存储空间也影响效率。而Direct方式则不存在这个问题。
+3、强一致语义(Exactly-once semantics)。High-level数据由Spark Streaming消费，但是Offsets则是由Zookeeper保存。通过参数配置，可以实现at-least once消费，此种情况有重复消费数据的可能。
+4、降低资源。Direct不需要Receivers，其申请的Executors全部参与到计算任务中；而Receiver-based则需要专门的Receivers来读取Kafka数据且不参与计算。因此相同的资源申请，Direct 能够支持更大的业务。
+5、降低内存。Receiver-based的Receiver与其他Exectuor是异步的，并持续不断接收数据，对于小业务量的场景还好，如果遇到大业务量时，需要提高Receiver的内存，但是参与计算的Executor并无需那么多的内存。而Direct 因为没有Receiver，而是在计算时读取数据，然后直接计算，所以对内存的要求很低。实际应用中我们可以把原先的10G降至现在的2-4G左右。
+6、鲁棒性更好。Receiver-based方法需要Receivers来异步持续不断的读取数据，因此遇到网络、存储负载等因素，导致实时任务出现堆积，但Receivers却还在持续读取数据，此种情况很容易导致计算崩溃。Direct 则没有这种顾虑，其Driver在触发batch 计算任务时，才会读取数据并计算。队列出现堆积并不会引起程序的失败。
+
+Direct方式的缺点：
+
+    提高成本。Direct需要用户采用checkpoint或者第三方存储来维护offsets，而不像Receiver-based那样，通过ZooKeeper来维护Offsets，此提高了用户的开发成本。
+
+    监控可视化。Receiver-based方式指定topic指定consumer的消费情况均能通过ZooKeeper来监控，而Direct则没有这种便利，如果做到监控并可视化，则需要投入人力开发。
+
+
+
+Receive-base优点：
+1、Kafka的high-level数据读取方式让用户可以专注于所读数据，而不用关注或维护consumer的offsets，这减少用户的工作量以及代码量而且相对比较简单。
+
+Receive-base的缺点：
+1、防数据丢失。做checkpoint操作以及配置spark.streaming.receiver.writeAheadLog.enable参数，配置spark.streaming.receiver.writeAheadLog.enable参数，每次处理之前需要将该batch内的日志备份到checkpoint目录中，这降低了数据处理效率，反过来又加重了Receiver端的压力；另外由于数据备份机制，会受到负载影响，负载一高就会出现延迟的风险，导致应用崩溃。
+2、单Receiver内存。由于receiver也是属于Executor的一部分，那么为了提高吞吐量，提高Receiver的内存。但是在每次batch计算中，参与计算的batch并不会使用到这么多的内存，导致资源严重浪费。
+3、在程序失败恢复时，有可能出现数据部分落地，但是程序失败，未更新offsets的情况，这导致数据重复消费。
+4、提高并行度，采用多个Receiver来保存Kafka的数据。Receiver读取数据是异步的，并不参与计算。如果开较高的并行度来平衡吞吐量很不划算。5、Receiver和计算的Executor的异步的，那么遇到网络等因素原因，导致计算出现延迟，计算队列一直在增加，而Receiver则在一直接收数据，这非常容易导致程序崩溃。
+6、采用MEMORY_AND_DISK_SER降低对内存的要求。但是在一定程度上影响计算的速度
+--------------------- 
+作者：gongpulin 
+来源：CSDN 
+原文：https://blog.csdn.net/gongpulin/article/details/77619771 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
 ## 17. updatebykey 的作用？ 企业级应用？
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/2b180ce546cdfba708c5ee81aa928836.jpg)
