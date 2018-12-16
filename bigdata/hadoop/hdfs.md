@@ -210,8 +210,9 @@ SecondaryNameNOde
 
 ![image](http://static.lovedata.net/jpg/2018/12/16/713c5554d45871c0a1b3da44941ed24c.jpg)
 
+[java.io.IOException: Timed out waiting 20000ms for a quorum of nodes to respond - 火星十一郎 - 博客园](https://www.cnblogs.com/hxsyl/p/6063702.html)
 
+active节点死掉后，没有进行故障转移和切换，standy节点没有自动转变成active状态。导致整个集群死掉。
 
-
-
+在 HDFS的集群中，存在NameNode单点故障(a single point of failure)，Quorum-based Storage方法大体上是：增加journalnode节点部署Quorum Journal Manager，通过quorum来进行日志管理。NameNode Active将editlog写入到journalnode，Standby NameNode读取journalnode的日志并应用到本地。当NameNode Active不可用时，Standby NameNode在执行完全部journalnode上的日志后变为Active状态。
 
