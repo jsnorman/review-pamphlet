@@ -370,6 +370,13 @@ HBase采用的是Key/Value的存储方式， 这意味着， 即使随着数据�
 
 
 
+## 22. hfds 如何启动启用数据块编码? 为什么需要？
+
+空间极其浪费
+![image](http://static.lovedata.net/jpg/2018/12/16/513ceaa453fc112f2d883919edb3ec0a.jpg)
 
 
+![image](http://static.lovedata.net/jpg/2018/12/16/7e2a965831aa2b7e3579c8adfd7f4331.jpg)
 
+什么是数据块编码
+数据块编码主要是针对KeyValue中的Key进行编码， 减少Key存储所占用的空间。 因为我们可以发现其实很多Key的前缀都是重复的。
