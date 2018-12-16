@@ -200,3 +200,18 @@ SecondaryNameNOde
 [hadoop HA场景下 java客户端远程访问hdfs配置 - 欢迎各位大神指导，评论，互相学习~ - CSDN博客](https://blog.csdn.net/wo198711203217/article/details/80528860)
 
 ![image](http://static.lovedata.net/jpg/2018/12/16/59e206dc907f62d6ef1e86feedce9e7c.jpg)
+
+
+## 13 hdfs 排错？遇到了哪些问题？
+
+### 13.1 java.io.IOException: Timed out waiting 20000ms for a quorum of nodes to respond namenode 自己挂掉
+
+![image](http://static.lovedata.net/jpg/2018/12/16/95016309d4018363c07d6ac9de28c726.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/713c5554d45871c0a1b3da44941ed24c.jpg)
+
+
+
+
+
+
