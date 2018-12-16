@@ -49,6 +49,26 @@
 
 ## 4. spark streaming 的性能调优
 
+![image](http://static.lovedata.net/jpg/2018/12/16/b6f7185e3b25402acca66b6e97943ef6.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/b1fd6a911ecdaf5ac048831b742b5bc6.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/696fd57c6272b46d3b48207d7e3d4982.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/77c9ea861c5fce256806dafda01164d5.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/6497d5e65fbbdc6d2fc59a9d29d468f8.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/063ed61132a76114a23616b18592ed49.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/419e4094cb076511e466ad5c6875c633.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/24ec91cacd8e116907ba9bd49437ba2a.jpg)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/16/598989ae837b34b5264aad91df491969.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/16/4878f666c57d9b505e5ef7c450133159.jpg)
 
 
 

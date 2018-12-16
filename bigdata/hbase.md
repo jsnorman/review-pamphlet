@@ -337,6 +337,8 @@ hbase.hstore.compaction.ratio 将store file 按照文件年龄排序（older to 
 
 ![image](http://static.lovedata.net/jpg/2018/12/14/d8c883d1e7ff259892382e221313a177.jpg)
 
+
+## 19. 为什么要用HBase
  
  
  
