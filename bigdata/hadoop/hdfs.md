@@ -216,3 +216,10 @@ active节点死掉后，没有进行故障转移和切换，standy节点没有�
 
 在 HDFS的集群中，存在NameNode单点故障(a single point of failure)，Quorum-based Storage方法大体上是：增加journalnode节点部署Quorum Journal Manager，通过quorum来进行日志管理。NameNode Active将editlog写入到journalnode，Standby NameNode读取journalnode的日志并应用到本地。当NameNode Active不可用时，Standby NameNode在执行完全部journalnode上的日志后变为Active状态。
 
+
+**和共享NFS目录这种被动的纯存储机制相比， JournalNodes能够防止接受多个NameNode同时对其写操作**（所以 “fencing”这一步骤不是必须的）。不过，采用该机制实现HA的集群就变成了必须依赖于JournalNode　Quorum才能正常工作。在这一点上，和HBase对Zookeeper的依赖有点类似。如果NameNode无法获取JournalNode Quorum，HDFS则会无法格式化或无法启动，会提示如下错误信息：
+
+10/21/12 01:01:01 WARN namenode.FSEditLog: Unable to determine input streams from QJM to [10.0.1.10:8485, 10.0.1.10:8486, 10.0.1.10:8487]. Skipping. java.io.IOException: Timed out waiting 20000ms for a quorum of nodes to respond.
+
+不过，这些JournalNode的负载不大，建议是可以运行在Master daemon的机器上。
+
