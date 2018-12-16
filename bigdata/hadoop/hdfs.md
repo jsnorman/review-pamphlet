@@ -199,4 +199,4 @@ SecondaryNameNOde
 
 [hadoop HA场景下 java客户端远程访问hdfs配置 - 欢迎各位大神指导，评论，互相学习~ - CSDN博客](https://blog.csdn.net/wo198711203217/article/details/80528860)
 
-HA的作用是保证在一个namenode挂掉的时候， 另外一个namenode可以立即启动来替代这个挂掉的namenode。 这样就不会发生单点故障问题。 实现原理简单来说就是：同时启动两台namenode， 一台是active状态（活跃状态， 真正在工作的） ， 另外一台是standby状态（它唯一要做的事情就是把active状态的namenode做过的所有事情同步过来， 方便在第一台namenode故障的时候可以无缝切换） 。设想一下， 既然是故障恢复方案， 总得有那么一个机制是用来检测故障的， 比如做系统心跳之类的， 是吧？ 在HA方案中， Hadoop集群利用ZooKeeper来做节点维护， 具体的就是节点的故障检测、 状态标定等。 这些杂事要自己来写也是很麻烦的， 所以Hadoop就把这些事情交给了ZooKeeper。 当ZooKeeper检测到active节点已经宕机， 就会启动切换机制。之前提到standby状态的namenode所做的唯一的事情就是同步active状态节点的数据， 那么也需要一个数据同步的机制， 是吧？ 这块无论是让哪个namenode来做都不是很合适。 所以， 在这里又引入了一种新的节点， 叫做journalnode。 这种节点专门用于同步namenode的所有操作。 standby节点就是通过journalnode集群来同步active节点的操作
+![image](http://static.lovedata.net/jpg/2018/12/16/59e206dc907f62d6ef1e86feedce9e7c.jpg)
