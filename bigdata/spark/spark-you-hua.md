@@ -45,3 +45,11 @@
 7. 解决方案七：使用随机前缀和扩容RDD进行join
 
 [Spark性能优化指南——高级篇 -](https://tech.meituan.com/spark-tuning-pro.html)
+
+
+## 4. spark streaming 的性能调优
+
+
+
+
+
