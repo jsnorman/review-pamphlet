@@ -201,6 +201,10 @@ SecondaryNameNOde
 
 ![image](http://static.lovedata.net/jpg/2018/12/16/59e206dc907f62d6ef1e86feedce9e7c.jpg)
 
+---
+
+![image](http://static.lovedata.net/jpg/2018/12/16/b5d64e7029c32ab139d80f4072d70c92.jpg)
+
 
 ## 13 hdfs 排错？遇到了哪些问题？
 
