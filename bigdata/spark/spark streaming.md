@@ -356,3 +356,11 @@ Receive-base的缺点：
 ![image](http://static.lovedata.net/jpg/2018/12/15/ad54f8f0c68c3f00c183b230fe5e904b.jpg)
 
 ![image](http://static.lovedata.net/jpg/2018/12/15/417ce39e1f1f4ebc88638aa322cdc9cd.jpg)
+
+
+## 22. spark streaming 架构原理？
+
+![image](http://static.lovedata.net/jpg/2018/12/16/30b78673caf5d8811d97761d706ef6d4.jpg)
+
+
+
