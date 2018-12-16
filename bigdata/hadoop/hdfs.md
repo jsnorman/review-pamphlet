@@ -223,3 +223,31 @@ active节点死掉后，没有进行故障转移和切换，standy节点没有�
 
 不过，这些JournalNode的负载不大，建议是可以运行在Master daemon的机器上。
 
+[hdfs高可用性（HDFS High Availability） - shihuai355 - 博客园](http://www.cnblogs.com/shihuai355/p/3894186.html)
+
+
+[namenode gc导致的故障及解决办法记录 - 阿飞的日志   about云开发](http://www.aboutyun.com/blog-3890-582.html)
+
+后续解决方法：
+
+1）调节journalnode 的写入超时时间
+
+dfs.qjournal.write-txns.timeout.ms
+
+2）调整namenode 的java参数，提前触发 full gc，这样full gc 的时间就会小一些。
+
+3）默认namenode的fullgc方式是parallel gc，是stw模式的，更改为cms的格式。调整namenode的启动参数：
+-XX:+UseCompressedOops 
+-XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled 
+-XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 
+-XX:+CMSParallelRemarkEnabled -XX:+DisableExplicitGC 
+-XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=75
+ -XX:SoftRefLRUPolicyMSPerMB=0
+
+
+
+
+
+
+
+
