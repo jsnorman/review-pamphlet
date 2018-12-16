@@ -191,3 +191,7 @@ SecondaryNameNOde
 1. Fsimage Editlog 合并操作  请求NN 停止Editlog文件，添加一个新的文件Edtlog.new ，然后将Fsimage和editlog拉回到本地，加载到内存，执行合并，然后发送到NN，NN收到后使用新的替换旧的FSimage，用Editlog.nwe替换editlog文件
 2. 名称节点的检查点  SN成为NN的检查点， 在拉回数据之后的一段时间内，如果NN丢失了，会导致一部分数据丢失，并不是热备份。
 
+
+## 12. hdfs ha 场景下，如何连接
+
+[hadoop HA场景下 java客户端远程访问hdfs配置 - 欢迎各位大神指导，评论，互相学习~ - CSDN博客](https://blog.csdn.net/wo198711203217/article/details/80528860)
