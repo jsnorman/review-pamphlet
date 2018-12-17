@@ -230,6 +230,10 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/12/15/91eca7933a9000895e4975782d9504f6.jpg)
 [Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
 [Spark Streaming整合kafka实战 - 布里啾啾迪布利多的博客 - CSDN博客](https://blog.csdn.net/weixin_41615494/article/details/79521737)
+
+
+[Spark Streaming和Kafka整合保证数据零丢失 - 微信-大数据从业者 - 博客园](https://www.cnblogs.com/felixzh/p/6371253.html)
+
 ## 14. ss 消费 kafka 如何保证有序？
 
 
@@ -239,6 +243,8 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 ![image](http://static.lovedata.net/jpg/2018/12/15/e0789f02a71f7efae3f7deac775045d3.jpg)
 
 ## 16. ss 消费kafka 的两种方式？
+
+[Spark Streaming和Kafka整合保证数据零丢失 - 微信-大数据从业者 - 博客园](https://www.cnblogs.com/felixzh/p/6371253.html)
 
  
 ![image](http://static.lovedata.net/jpg/2018/12/15/bc7ad59d7e6ebfbe14040b26737c81e2.jpg)
@@ -362,5 +368,5 @@ Receive-base的缺点：
 
 ![image](http://static.lovedata.net/jpg/2018/12/16/30b78673caf5d8811d97761d706ef6d4.jpg)
 
-
+![image](http://static.lovedata.net/jpg/2018/12/17/1f4dcd3c2c7294e0e14cc5f601cfa68a.jpg)
 
