@@ -26,6 +26,8 @@ PermSize的调整
 
 ![image](http://static.lovedata.net/jpg/2018/12/17/4bb23b42fdca1dd6201882ca23e6b2e9.jpg)
 
-### G1 GC 分 Region 单独GC 尽力延迟Full GC到来时间。
+### G1 GC 分 Region 单独GC
+    尽力延迟Full GC到来时间。MaxGCPauseMillis  参数来控制一旦发生Full GC的时候
+的最大暂停时间， 避免时间太长造成RegionServer自
 
 ![image](http://static.lovedata.net/jpg/2018/12/17/f679ec23fa4361f37ebaee0ee0ee1602.jpg)
