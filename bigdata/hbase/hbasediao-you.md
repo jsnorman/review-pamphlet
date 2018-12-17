@@ -67,4 +67,6 @@ TLAB的实现思路， 只不过内存空间是由Memstore来分配的
 chunk里面只放1KB的数据， 这个chunk也要占2MB的大小。 不过， 为了不
 发生Full GC， 这些都可以忍
 
-
+你可能会觉得G1GC跟MSLAB的实现思
+路非常接近， 那为什么还要发明MSLAB策略呢？ 因为G1GC是MSLAB发明后
+才出现的策略。
