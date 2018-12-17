@@ -89,9 +89,16 @@ Memstore中去获取。 如果获取到了则在返回数据的同时把Block块
 下次查询使用。 当缓存满了的时候， 会根据LRU的算法来淘汰block。
 LRUBlockCache被分为三个区域， 如表8-5所示
 
+![image](http://static.lovedata.net/jpg/2018/12/17/ee5b4cef804b0b0971de116f3670bfaf.jpg)
 
-
-
+的
+列族被设置为IN-MEMORY并不是意味着这个列族是存储在内存中
+的。 这个列族依然是 跟别的列族一样存储在硬盘上。 一般的Block被第
+一次读出后是放到single-access的， 只有当被访问多次后才会放到
+multi-access， 而带有IN-MEMORY属性的列族中的Block一开始就被放到
+in-memory区域。 这个区域的缓存有最高的存活时间， 在需要淘汰Block
+的时候， 这个区域的Block是最后被考虑到的， 所以这个属性仅仅是为
+了BlockCache而创造的。
 
 
 
