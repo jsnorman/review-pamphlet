@@ -10,6 +10,7 @@
   * [设计](bigdata/设计.md)
   * [Hive](bigdata/hive.md)
   * [Hbase](bigdata/hbase.md)
+    * [Hbase调优](bigdata/hbase/hbasediao-you.md)
   * [Spark](bigdata/spark/spark.md)
     * [Spark Streaming](bigdata/spark/spark streaming.md)
     * [Spark SQL](bigdata/spark/spark-sql.md)

@@ -307,6 +307,12 @@ BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到
 
  在compaction发生的时候才会实际删除数据 
  
+ ![image](http://static.lovedata.net/jpg/2018/12/17/b2abeb95448d071dd681a901c624a5ad.jpg)
+ 
+** 难道墓碑标记和数据还不在一个地方**
+ 
+ 
+ 
 ## 18 HBase什么时候作minor major compact
 
 HBase什么时候做minor major compact
@@ -477,3 +483,16 @@ LSM 树  如何在频繁的数据改动下保持系统读取速度的稳定性 
 ![image](http://static.lovedata.net/jpg/2018/12/17/2962926e76ccb1491f2fca2934fe3fd8.jpg)
 
 ![image](http://static.lovedata.net/jpg/2018/12/17/09f67f730e093a8857d5b4eb2d337d12.jpg)
+
+
+## 28 data block 类型
+
+![image](http://static.lovedata.net/jpg/2018/12/17/4bacdf2954e9a69716c3eaad4ed99b48.jpg)
+
+
+##  29. hbase region 定位
+
+![image](http://static.lovedata.net/jpg/2018/12/17/48b8a77549571b7627af0f71547c85bf.jpg)
+![image](http://static.lovedata.net/jpg/2018/12/17/41d9d1fef7c5f0db7227ae2c4661f344.jpg)
+
+
