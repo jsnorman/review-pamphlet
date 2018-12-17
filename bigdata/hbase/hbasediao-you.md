@@ -36,3 +36,8 @@ PermSize的调整
 ### 选择
 
 ![image](http://static.lovedata.net/jpg/2018/12/17/84a3fe8a0412dad42adcd7691b52a19b.jpg)
+
+
+##  Memstore的专属JVM策略MSLAB
+
+CMS 合并碎片也可能很慢，导致zk认为已经死掉了
