@@ -59,3 +59,12 @@ TLAB（ Thread-Local allocation buffer） 。 当你使用TLAB的时候， 每
 HBase就自己实现了一套以Memstore为最小单元的内存管理机制， 称为
 MSLAB（ Memstore-Local Allocation Buffers） 。 这套机制完全沿袭了
 TLAB的实现思路， 只不过内存空间是由Memstore来分配的
+
+![image](http://static.lovedata.net/jpg/2018/12/17/6f9b9e6a271a69be879e8ef41533262c.jpg)
+
+这样就消除了小
+碎片引起的无法插入数据问题， 但是会降低内存利用率， 因为就算你的
+chunk里面只放1KB的数据， 这个chunk也要占2MB的大小。 不过， 为了不
+发生Full GC， 这些都可以忍
+
+
