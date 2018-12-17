@@ -460,11 +460,20 @@ hbase.master.logcleaner.ttl定义的超时时间（ 默认10分钟） 为止
 
 ## 26. 为什么需要有 MemStore
 
+- 由于HDFS上的文件不可修改， 为了让数据顺序存储从而提高
+读取效率， HBase使用了LSM树结构来存储数据。 数据会先在Memstore中
+整理成LSM树， 最后再刷写到HFile上。 不过不要想当然地认为读取也是
+先读取Memstore再读取磁盘哟！ 读取的时候是有专门的缓存叫
+BlockCache， 这个BlockCache如果开启了， 就是先读BlockCache， 读不到才是读HFile+Memstor
+
+- 优化数据的存储。 比如一个数据添加后就马上删除了， 这样
+在刷写的时候就可以直接不把这个数据写到HDFS上。
 
 
+LSM 树  如何在频繁的数据改动下保持系统读取速度的稳定性  算法的核心在于尽量保证数据是顺序存储到磁盘上的， 并且会有频率地对数据进行整理， 确保其顺序性。 而顺序性就可以最大程度保证数据的读取性能稳定
 
+## 27. Hfile 格式
 
+![image](http://static.lovedata.net/jpg/2018/12/17/2962926e76ccb1491f2fca2934fe3fd8.jpg)
 
-
-
-
+![image](http://static.lovedata.net/jpg/2018/12/17/09f67f730e093a8857d5b4eb2d337d12.jpg)
