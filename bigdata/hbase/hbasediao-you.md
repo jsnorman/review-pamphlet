@@ -76,3 +76,13 @@ chunk里面只放1KB的数据， 这个chunk也要占2MB的大小。 不过， �
 
 ##  BlockCache的优化
 
+![image](http://static.lovedata.net/jpg/2018/12/17/89d8c6349e48b9d0a3bfdd7403ca7a43.jpg)
+
+BlockCache的工作原理就跟你们猜想的一样了： 读请求到HBase之
+后先尝试查询BlockCache， 如果获取不到就去HFile（ StoreFile） 和
+Memstore中去获取。 如果获取到了则在返回数据的同时把Block块缓存
+到BlockCache中。
+
+
+
+
