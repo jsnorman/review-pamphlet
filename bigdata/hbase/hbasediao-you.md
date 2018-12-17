@@ -85,4 +85,15 @@ Memstore中去获取。 如果获取到了则在返回数据的同时把Block块
 
 
 ### LRUBlock Cache
+之前只有这种BlockCache的实现方案。 LRU就是Least Recently Used，即近期最少使用算法的缩写。 读出来的block会被放到BlockCache中待
+下次查询使用。 当缓存满了的时候， 会根据LRU的算法来淘汰block。
+LRUBlockCache被分为三个区域， 如表8-5所示
+
+
+
+
+
+
+
+
 
