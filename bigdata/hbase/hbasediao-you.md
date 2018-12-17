@@ -130,3 +130,14 @@ BucketCache中查询真正的数据。 其实这种实现是一种更合理的�
 质也是由快到慢。 考虑到成本和性能的组合， 比较合理的介质是：
 LRUCache使用内存->BuckectCache使用SSD->HFile使用机械硬盘
 
+
+## 对比
+
+因为BucketCache自己控制内存空间， 碎片比较少， 所以GC时间大部分都比LRUCache短。
+在缓存全部命中的情况下， LRUCache的吞吐量是BucketCache的
+两倍； 在缓存基本命中的情况下， LRUCache的吞吐量跟
+BucketCache基本相等。
+读写延迟， IO方面两者基本相等。
+缓存全部命中的情况下， LRUCache比使用fiile模式的
+BucketCache CPU占用率低一倍， 但是跟其他情况下差不多。
+
