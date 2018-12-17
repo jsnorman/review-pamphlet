@@ -28,6 +28,9 @@ FIFO
 ![image](http://static.lovedata.net/jpg/2018/12/17/8190f7b0757b94749af55a817ea0e52a.jpg)
 
 ### 容量调度器
+![image](http://static.lovedata.net/jpg/2018/12/17/fd27f3abe23111baa0329da795979680.jpg)
+
+分队列，如果队列不够了，如果集群还有资源，也可以侵占其他队列的， 弹性队列
 
 ## 3 画一个yarn架构图，及其通信流程；
 
