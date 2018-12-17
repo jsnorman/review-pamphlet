@@ -25,6 +25,10 @@ FIFO
 
 需要熟悉下Yarn资源调度机制
 
+![image](http://static.lovedata.net/jpg/2018/12/17/8190f7b0757b94749af55a817ea0e52a.jpg)
+
+### 容量调度器
+
 ## 3 画一个yarn架构图，及其通信流程；
 
 ![image](http://static.lovedata.net/jpg/2018/7/4/33789bff3b6481fa26da13c743d815c7.jpg)
