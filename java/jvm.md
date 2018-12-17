@@ -278,8 +278,24 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 
 
 
-## 19. Minor GC、Major GC和Full GC之间的区别
+## 19. Minor GC、Major GC和Full GC之间的区别 以及触发的条件
 [Minor GC、Major GC和Full GC之间的区别 - ImportNew](http://www.importnew.com/15820.html)
+
+inor GC ，Full GC 触发条件
+
+Minor GC触发条件：当Eden区满时，触发Minor GC。
+
+Full GC触发条件：
+
+（1）调用System.gc时，系统建议执行Full GC，但是不必然执行
+
+（2）老年代空间不足
+
+（3）方法去空间不足
+
+（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存
+
+（5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
 
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/15e7e0314a394a761e3954eb36bc243f.jpg)
@@ -291,4 +307,9 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 ## 21 什么时候会 stop the world
 
 [JVM GC中Stop the world案例实战 - Hipparchus的博客 - CSDN博客](https://blog.csdn.net/sinat_25306771/article/details/52374498)
+
+
+
+
+
 
