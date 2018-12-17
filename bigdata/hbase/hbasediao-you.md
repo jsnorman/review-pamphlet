@@ -70,3 +70,9 @@ chunk里面只放1KB的数据， 这个chunk也要占2MB的大小。 不过， �
 你可能会觉得G1GC跟MSLAB的实现思
 路非常接近， 那为什么还要发明MSLAB策略呢？ 因为G1GC是MSLAB发明后
 才出现的策略。
+
+## WAL的优化
+![image](http://static.lovedata.net/jpg/2018/12/17/a34156a5947a1d4de335bd0ea3a8973c.jpg)
+
+##  BlockCache的优化
+
