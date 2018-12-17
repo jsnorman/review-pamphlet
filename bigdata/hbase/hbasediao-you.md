@@ -107,6 +107,26 @@ in-memory区域。 这个区域的缓存有最高的存活时间， 在需要淘
 听到Full GC都会浑身一颤。 在Full GC的过程中， 整个JVM完全处于停
 滞状态， 有的时候长达几分钟
 
+##  Bucket Cache  堆外内存
+
+![image](http://static.lovedata.net/jpg/2018/12/17/56834eba10cd96bcfe64ce29c9fefb61.jpg)
 
 
+用法：
+
+- ![image](http://static.lovedata.net/jpg/2018/12/17/5e21fb96dc3dc94a77a989a2cd934c72.jpg)
+- ![image](http://static.lovedata.net/jpg/2018/12/17/34c5d3e1fa2a06798caeb9ab553943b8.jpg)
+![image](http://static.lovedata.net/jpg/2018/12/17/739805ebd06c047f8a92c896a5f40643.jpg)
+
+在BucketCache的时代， 也不是单纯地使用BucketCache， 但是这回
+不是一二级缓存的结合； 而是另一种模式， 叫组合模式
+（ CombinedBlockCahce） 。 具体地说就是把不同类型的Block分别放到
+LRUCache和BucketCache中。
+
+Index Block和Bloom Block会被放到LRUCache中。 Data Block被直
+接放到BucketCache中， 所以数据会去LRUCache查询一下， 然后再去
+BucketCache中查询真正的数据。 其实这种实现是一种更合理的二级缓
+存， 数据从一级缓存到二级缓存最后到硬盘， 数据是从小到大， 存储介
+质也是由快到慢。 考虑到成本和性能的组合， 比较合理的介质是：
+LRUCache使用内存->BuckectCache使用SSD->HFile使用机械硬盘
 
