@@ -281,6 +281,30 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 ## 19. Minor GC、Major GC和Full GC之间的区别 以及触发的条件
 [Minor GC、Major GC和Full GC之间的区别 - ImportNew](http://www.importnew.com/15820.html)
 
+
+![image](http://static.lovedata.net/jpg/2018/12/12/15e7e0314a394a761e3954eb36bc243f.jpg)
+gc 担保失败
+
+空间分配担保失败.
+在发生MinorGC前,检查老年代是否有连续空间,如果有,则执行,如果没有,根据设置:-XX:-HandlePromotionFailure 指定,如果打开,那么继续检查,当前老年代最大可用连续空间大于平均历次晋升到老年代大小,如果大于,则进行MinorGC,否则进行FullGC,如果HandlePromotionFailure 不设置 直接进行FullGC.
+大致就是这样: 
+--------------------- 
+作者：scugxl 
+来源：CSDN 
+原文：https://blog.csdn.net/scugxl/article/details/50935863 
+版权声明：本文为博主原创文章，转载请附上博文链接！gc 担保失败
+
+空间分配担保失败.
+在发生MinorGC前,检查老年代是否有连续空间,如果有,则执行,如果没有,根据设置:-XX:-HandlePromotionFailure 指定,如果打开,那么继续检查,当前老年代最大可用连续空间大于平均历次晋升到老年代大小,如果大于,则进行MinorGC,否则进行FullGC,如果HandlePromotionFailure 不设置 直接进行FullGC.
+大致就是这样: 
+--------------------- 
+作者：scugxl 
+来源：CSDN 
+原文：https://blog.csdn.net/scugxl/article/details/50935863 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+[GC详解及Minor GC和Full GC触发条件总结 - 狂风骤起 - 博客园](https://www.cnblogs.com/xifenglou/p/9045447.html)
+
 inor GC ，Full GC 触发条件
 
 Minor GC触发条件：当Eden区满时，触发Minor GC。
@@ -298,7 +322,26 @@ Full GC触发条件：
 （5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
 
 
+---
+![image](http://static.lovedata.net/jpg/2018/12/17/823c094f259d4e28bbed4c07ead04e83.jpg)
+
+gc 担保失败
+
+空间分配担保失败.
+在发生MinorGC前,检查老年代是否有连续空间,如果有,则执行,如果没有,根据设置:-XX:-HandlePromotionFailure 指定,如果打开,那么继续检查,当前老年代最大可用连续空间大于平均历次晋升到老年代大小,如果大于,则进行MinorGC,否则进行FullGC,如果HandlePromotionFailure 不设置 直接进行FullGC.
+
 ![image](http://static.lovedata.net/jpg/2018/12/12/15e7e0314a394a761e3954eb36bc243f.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/17/1535958445e1e10731cd90937732d9fb.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/17/9f10d38425f3b14ebf8d1493b17150ab.jpg)
+
+ Cocurrent mode failure
+
+发生在cms的清理sweep阶段,发现有新的垃圾产生,而且老年代没有足够空间导致的.
+关于cms:
+初始标记(STW) - >并发标记　－＞重新标记（STW）　－＞并发清除．
+STW = stop the world.
 
 ## 20 什么是空间分配担保
 
