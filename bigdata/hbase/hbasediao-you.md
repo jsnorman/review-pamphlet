@@ -32,3 +32,7 @@ PermSize的调整
 大概是32GB、 64GB或者以上， 这样才算大内存
 
 ![image](http://static.lovedata.net/jpg/2018/12/17/f679ec23fa4361f37ebaee0ee0ee1602.jpg)
+
+### 选择
+
+![image](http://static.lovedata.net/jpg/2018/12/17/84a3fe8a0412dad42adcd7691b52a19b.jpg)
