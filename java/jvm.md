@@ -284,7 +284,6 @@ concurrent mark sweep 收集器  一种以获取最短回收停顿时间为目�
 
 ![image](http://static.lovedata.net/jpg/2018/12/12/15e7e0314a394a761e3954eb36bc243f.jpg)
 gc 担保失败
-
 空间分配担保失败.
 在发生MinorGC前,检查老年代是否有连续空间,如果有,则执行,如果没有,根据设置:-XX:-HandlePromotionFailure 指定,如果打开,那么继续检查,当前老年代最大可用连续空间大于平均历次晋升到老年代大小,如果大于,则进行MinorGC,否则进行FullGC,如果HandlePromotionFailure 不设置 直接进行FullGC.
 大致就是这样: 
