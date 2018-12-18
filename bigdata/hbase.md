@@ -303,6 +303,33 @@ BlockCache也称为读缓存，HBase会将一次文件查找的Block块缓存到
 
 ## 16. 行式存储和列式存储的优劣势？
 
+[行式存储和列式存储的比较 - weixin_39182877的博客 - CSDN博客](https://blog.csdn.net/weixin_39182877/article/details/79438428)
+
+
+行式存储的优点：
+
+同一行数据存放在同一个block块里面，select * from table_name;数据能直接获取出来；
+
+ INSERT/UPDATE比较方便
+
+行式存储的缺点：
+
+**不同类型数据存放在同一个block块里面，压缩性能不好；**
+select id,name from table_name;这种类型的列查询，所有数据都要读取，而不能跳过。
+
+
+列式存储的优点：
+
+同类型数据存放在同一个block块里面，压缩性能好；
+
+任何列都能作为索引。
+
+列式存储的缺点：
+
+select * from table_name;这类全表查询，需要数据重组；
+
+**INSERT/UPDATE比较麻烦**。
+
 ## 17. hbase 什么时候会物理删除数据
 
  在compaction发生的时候才会实际删除数据 
