@@ -236,3 +236,10 @@ YARN 并不是下一代MapReduce（MRv2），下一代MapReduce与第一代MapRe
 4.执行hadoop balance命令。（此项为balance集群使用，如果只是添加节点，则此步骤不需要）
 
 [hadoop 集群 加入一个新的存储节点和删除一个计算节点需要刷新集群状态命令 - CSDN博客](https://blog.csdn.net/iwantknowwhat/article/details/50822316)
+
+
+## hadoop 各个版本区别
+
+[Hadoop版本选择 - jinhaolin - 博客园](https://www.cnblogs.com/jinhaolin/p/6750295.html)
+![image](http://static.lovedata.net/jpg/2018/12/18/4cf1ea2fb7017e61fdbc6c52e728e244.jpg)
+![image](http://static.lovedata.net/jpg/2018/12/18/26abee744129f86f7dc9f44876640c11.jpg)
