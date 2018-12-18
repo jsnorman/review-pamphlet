@@ -32,7 +32,16 @@ Container是RM分配资源的基本单位。每个Container包含特定数量的
 
 分队列，如果队列不够了，如果集群还有资源，也可以侵占其他队列的， 弹性队列
 
+[利用yarn多队列实现hadoop资源隔离 - bbaiggey_bigdata的博客 - CSDN博客](https://blog.csdn.net/bbaiggey/article/details/53574468)
+
 ### 公平调度器
+
+![image](http://static.lovedata.net/jpg/2018/12/17/3bc918c58f5650fb0759ad9e4c9af687.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/17/909998ba7d27adbd269fcb49aad6f373.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/17/22485156d3525c767c59f12cee5c294c.jpg)
+
 
 
 
