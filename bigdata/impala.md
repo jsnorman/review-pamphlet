@@ -81,13 +81,26 @@
 
 相同点：
 
-    数据存储：使用相同的存储数据池都支持把数据存储于HDFS, HBase。
-    元数据：两者使用相同的元数据。
-    SQL解释处理：比较相似都是通过词法分析生成执行计划。
+数据存储：使用相同的存储数据池都支持把数据存储于HDFS, HBase。
+元数据：两者使用相同的元数据。
+SQL解释处理：比较相似都是通过词法分析生成执行计划。
 
+不同点
+  执行计划  hive 依赖mr， 执行计划划分，  mr  shuffle,  转换多轮 mr ，增加执行时间
+   impala  表现为一个完整执行计划树  分发计划，impalad 不用像hive 组合成管道性  mr   更好并发性，避免不必要 中间 sort  shuffle
+   
+   
+   
+ 数据流 
+ hive ： 推。每个机节点计算完成后主动推给后续节点
+ impala ： 拉
+ 
+ ![image](http://static.lovedata.net/jpg/2018/12/18/a47ebe72052fd388e75b19e1ae4d23b5.jpg)
+ 
+ ![image](http://static.lovedata.net/jpg/2018/12/18/a494fb8d3e1aafde87dad14d27e02884.jpg)
+ 
 
-
-
+## 7。 当数据集超出可用内存时会发生什么
 
 
 
