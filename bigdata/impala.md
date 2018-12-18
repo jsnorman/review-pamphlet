@@ -115,6 +115,7 @@ SQL解释处理：比较相似都是通过词法分析生成执行计划。
 
 ## 9.  Impala使用场景
 
+[Impala亲密接触之10：impala最佳实践（转、译、整理） - 张伟的专栏 - CSDN博客](https://blog.csdn.net/javastart/article/details/73603372)
 
 1. 什么情况下适合使用 Impala 而不适合 Hive 和 MapReduce？
 
