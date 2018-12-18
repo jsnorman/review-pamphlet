@@ -107,8 +107,9 @@ SQL解释处理：比较相似都是通过词法分析生成执行计划。
 
 假如查询失败，错误信息是 “memory limit exceeded”，你可能怀疑有内存泄露(memory leak)。其实问题可能是因为查询构造的方式导致 Impala 分配超出你预期的内存，从而在某些节点上超出 Impala 分配的内存限制(The problem could actually be a query that is structured in a way that causes Impala to allocate more memory than you expect, exceeded the memory allocated for Impala on a particular node)。一些特别内存密集型的查询和表结构如下：
 
-使用动态分区的 INSERT 语句，插入到包含许多分区的表中(特别是使用 Parquet 格式的表，这些表中每一个分区的数据都保存到内存中，直到它达到 1 GB 并被写入到硬盘里)。考虑把这样的操作分散成几个不同的 INSERT 语句，例如一次只加载一年的数据而不是一次加载所有年份的数据 
-在唯一或高基数(high-cardinality)列上的 GROUP BY 操作。Impala 为 GROUP BY 查询中每一个不同的值分配一些处理结构(handler structures)。成千上万不同的 GROUP BY 值可能超出内存限制 
+**使用动态分区的 INSERT 语句**，插入到包含许多分区的表中(特别是使用 Parquet 格式的表，这些表中每一个分区的数据都保存到内存中，直到它达到 1 GB 并被写入到硬盘里)。考虑把这样的操作分散成几个不同的 INSERT 语句，例如一次只加载一年的数据而不是一次加载所有年份的数据 
+
+**在唯一或高基数(high-cardinality)列上的 GROUP BY 操作**。Impala 为 GROUP BY 查询中每一个不同的值分配一些处理结构(handler structures)。成千上万不同的 GROUP BY 值可能超出内存限制 
 查询涉及到非常宽、包含上千个列的表，特别是包含许多 STRING 列的表。因为 Impala 允许 STRING 值最大不超过 32 KB，这些查询的中间结果集可能需要大量的内存分配
 
 
