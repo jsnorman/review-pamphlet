@@ -70,6 +70,10 @@
 
 ![image](http://static.lovedata.net/jpg/2018/12/16/4878f666c57d9b505e5ef7c450133159.jpg)
 
+## 5 spark 常见问题和解决
+
+[Spark程序运行常见错误解决方法以及优化 - sdujava2011 - CSDN博客](https://blog.csdn.net/sdujava2011/article/details/49796439)
+
 
 
 
