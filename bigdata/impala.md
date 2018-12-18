@@ -113,8 +113,20 @@ SQL解释处理：比较相似都是通过词法分析生成执行计划。
 查询涉及到非常宽、包含上千个列的表，特别是包含许多 STRING 列的表。因为 Impala 允许 STRING 值最大不超过 32 KB，这些查询的中间结果集可能需要大量的内存分配
 
 
+## 9.  Impala使用场景
 
 
+1. 什么情况下适合使用 Impala 而不适合 Hive 和 MapReduce？
+
+Impala 非常适合在大的数据集上，为交互式探索分析执行 SQL。Hive 和 MapReduce 则适合长时间运行的、批处理的任务，例如 ETL。
+2. Impala 是否需要 MapReduce ？如果 MapReduce 停了，Impala 是否能正常工作？
+
+Impala 用不到 MapReduce。
+3. Impala 是否可以用于复杂事件处理？
+
+例如，在工业环境中，许多客户端可能产生大量的数据。Impala 是否可用与分析这些数据，发现环境中显著的变化？
+
+复杂事件处理(Complex Event Processing,CEP) 通常使用专门的流处理系统处理。Impala 不是流处理系统，它其实更像关系数据库。
 
 
 
