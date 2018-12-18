@@ -10,6 +10,13 @@ Asynchronous barrier snapshots  ABS算法
 [apache flink 保证端到端exactly-once语义的简介（同样适用于kafka！... - 简书](https://www.jianshu.com/p/9d875f6e54f2)
 
 
+## 检查点机制
+
+在出现故障时候重新重置回正确的状态。、
+
+三个人一起数珠子的游戏， 三个人一起数珠子， 又想保持一致，怎么办，如何记住， 如果一个人被打断了，可能就要重数，甚至整个重数哟。  
+
+
 # 2.flink 运行时架构
 
 ![image](http://static.lovedata.net/jpg/2018/12/18/31a5a1466cf4e2031eeb420f8352fd5a.jpg)
