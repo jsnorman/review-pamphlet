@@ -57,3 +57,15 @@
 ![image](http://static.lovedata.net/jpg/2018/5/21/a022911b475d7424a30cc3b68673820a.jpg)
 
 # 5 impala 做的一些优化
+
+
+# 6 impala与hive的比较以及impala的优缺点
+
+[impala与hive的比较以及impala的有缺点 - Gemini的博客 - CSDN博客](https://blog.csdn.net/gemini_two/article/details/78992484)
+
+- 快速
+- 基于内存  
+- hive 基于 mr
+
+
+

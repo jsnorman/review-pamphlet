@@ -796,14 +796,14 @@ Semaphore 表示信号量 permits t通过构造函数指定。accquire 获取资
 
 # java
 
-## 1. 内存溢出了怎么去定位？
+## 37. 内存溢出了怎么去定位？
 
 [Java内存溢出定位和解决方案（new）](https://www.cnblogs.com/snowwhite/p/9471710.html " ")
 
 [Java 出现内存溢出的定位以及解决方案](https://www.cnblogs.com/zhchoutai/p/7270886.html "")
 
 
-## 2. 线程间如何通讯
+## 38. 线程间如何通讯
 
 CountDownLatch 利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能了。
 
@@ -816,6 +816,24 @@ CyclicBarrier 字面意思回环栅栏，通过它可以实现让**一组线程�
 [java线程间通信](https://blog.csdn.net/u011514810/article/details/77131296)
 
 
-## 3. 进程间如何通讯
+## 39. 进程间如何通讯
 
 [进程通讯（太过复杂）](https://www.cnblogs.com/LUO77/p/5816326.html)
+
+
+##  4 比较好的代码    
+
+Stringutils 忽略空字符串，不是通过正则表达式，效率高，代码复杂一些，
+
+    首先输入的regex是一个正则表达式,而不是一个普通的字符串,所以导致很多在正则表达式里面有特殊意义的比如 "." "|" "\" ,如果直接使用是不行的,另外一个方面我们输入的regex是以字符串形式传递的,对有些字符必须要转义,尤其是"\",而"\"也是转义字符,所以需加"\\",即为"\\."
+
+[commons-lang包的StringUtils.split()和jdk自带split()的区别 - mr_level - 博客园](https://www.cnblogs.com/mr-level/p/5546268.html)
+
+
+
+
+
+
+
+
+
