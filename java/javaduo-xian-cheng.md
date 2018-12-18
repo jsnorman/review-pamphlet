@@ -47,3 +47,14 @@ synchronized能锁住类、方法和代码块，而Lock是块范围内的
  
  如果获取锁的线程需要等待I/O或者调用了sleep()方法被阻塞了，但仍持有锁，其他线程只能干巴巴的等着，这样就会很影响程序效率。
 **因此就需要一种机制，可以不让等待的线程已知等待下去，比如值等待一段时间或响应中断，Lock锁就可以办到。**
+
+
+##  hashmap 和 concurrenthashmap 的区别
+
+[Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 - ImportNew](http://www.importnew.com/28263.html)
+
+
+
+
+
+

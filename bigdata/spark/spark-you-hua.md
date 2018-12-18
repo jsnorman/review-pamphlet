@@ -75,5 +75,25 @@
 [Spark程序运行常见错误解决方法以及优化 - sdujava2011 - CSDN博客](https://blog.csdn.net/sdujava2011/article/details/49796439)
 
 
+## 6 spark 优化
+
+[Spark性能优化指南——基础篇 - R星月 - 博客园](https://www.cnblogs.com/rxingyue/p/7113079.html)
+
+
+### 开发调优
+原则一：避免创建重复的RDD
+
+原则二：尽可能复用同一个RDD
+
+原则三：对多次使用的RDD进行持久化
+
+
+原则四：尽量避免使用shuffle类算子 使用广播变量
+
+原则五：使用map-side预聚合的shuffle操作
+
+
+
+
 
 
