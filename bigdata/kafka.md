@@ -421,3 +421,8 @@ segment file的组成
 [Kafka文件存储机制那些事 -](https://tech.meituan.com/kafka-fs-design-theory.html)
 [kafka存储结构 - CSDN博客](https://blog.csdn.net/yaolong336/article/details/80047701)
 [Kafka读写原理与存储结构 | Hello, World](https://qinzhaokun.github.io/2017/09/10/Kafka%E8%AF%BB%E5%86%99%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/)
+
+
+
+
+

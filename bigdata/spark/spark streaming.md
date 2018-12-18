@@ -236,6 +236,8 @@ DStream 的 .filter() 操作生成了 FilteredDStream，而 FilteredDStream 在�
 
 ## 14. ss 消费 kafka 如何保证有序？
 
+[kafka系列-kafka多分区的情况下保证数据的有序性 - weixin_41279060的博客 - CSDN博客](https://blog.csdn.net/weixin_41279060/article/details/79045151)
+
 
 ## 15 StreamingContext的作用
 
