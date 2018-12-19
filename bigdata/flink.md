@@ -29,6 +29,9 @@ Flink开发出了**checkpointing**机制，而它则是提供这种应用内仅�
 2. 消费的输入流位置
 
 
+在Flink 1.4版本之前，仅一次处理只限于Flink应用内。  后面的版本支持两阶段提交。   TwoPhaseCommitSinkFunction
+
+
 
 ## 检查点机制
 
