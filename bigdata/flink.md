@@ -10,6 +10,15 @@ Asynchronous barrier snapshots  ABS算法
 [apache flink 保证端到端exactly-once语义的简介（同样适用于kafka！... - 简书](https://www.jianshu.com/p/9d875f6e54f2)
 
 
+![image](http://static.lovedata.net/jpg/2018/12/19/314c8e396615bdc6539eb235317fe7d5.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/a1aee54c0d3e156d4f90b152d2c0383e.jpg)
+
+
+2.FlinkKafkaConsumer08通过Kafka的低级API和Flink带barrier的轻量级checkpoint机制保证了在高吞吐量的情况下的exactly-once。
+
+
+
 ## 检查点机制
 
 在出现故障时候重新重置回正确的状态。、
@@ -87,8 +96,10 @@ ExecuteiGraph 是 JobGraph 的 并行化，打散哟。
 
 allowLatency 窗口销毁时间延时， 比如延时 十秒钟，但是会重复计算窗口，造成数据异常
 
+![image](http://static.lovedata.net/jpg/2018/12/19/5867ddda990fb30931577845257e6069.jpg)
 
 
+# 6 flink  source  sink
 
-
+![image](http://static.lovedata.net/jpg/2018/12/19/60e8da9a0c69904f783249af9b33eeee.jpg)
 
