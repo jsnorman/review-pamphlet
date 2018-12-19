@@ -23,3 +23,24 @@ Asynchronous barrier snapshots  ABS算法
 # 2.flink 运行时架构
 
 ![image](http://static.lovedata.net/jpg/2018/12/18/31a5a1466cf4e2031eeb420f8352fd5a.jpg)
+
+[Flink原理与实现：架构和拓扑概览 - huangshulang1234的博客 - CSDN博客](https://blog.csdn.net/huangshulang1234/article/details/78666904)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/bd964c6c7b75fbf8fa29dc4983b9a30a.jpg)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/19/3bfe18f298c9dfb9c65eb31160bf6cf6.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/154f305bd931c83bc502d1dc2a751741.jpg)
+
+StreamGraph client 断生成，
+
+
+
+
+
+# 3. flink task slot 和 parallelism 介绍
+
+[ApacheFlink高级特性与高级应用之slot和parallelism介绍 - 云计算技术频道 - 红黑联盟](https://www.2cto.com/net/201711/699128.html)
+
+
