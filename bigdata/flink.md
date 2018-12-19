@@ -35,7 +35,13 @@ Asynchronous barrier snapshots  ABS算法
 
 StreamGraph client 断生成，
 
+ ![image](http://static.lovedata.net/jpg/2018/12/19/14b10d6b8ab3e4d1c6b6ed626b566ffe.jpg)
 
+![image](http://static.lovedata.net/jpg/2018/12/19/97cbd95ddb28550a45bb2a62c34efd5f.jpg)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/19/18ea0ef010c3ffd585d8d2b49339fa09.jpg)
+ExecuteiGraph 是 JobGraph 的 并行化，打散哟。
 
 
 
