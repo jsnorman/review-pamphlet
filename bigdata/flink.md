@@ -38,6 +38,14 @@ Flink开发出了**checkpointing**机制，而它则是提供这种应用内仅�
 在一个分布式且含有多个并发执行sink的应用中，仅仅执行单次提交或回滚是不够的，因为所有组件都必须对这些提交或回滚达成共识，这样才能保证得到一个一致性的结果。Flink使用两阶段提交协议以及预提交(pre-commit)阶段来解决这个问题。
 
 
+![image](http://static.lovedata.net/jpg/2018/12/19/8f3d0f1471871b25afbd91fc4b363ecd.jpg)
+
+
+[干货:Flink+Kafka 0.11端到端精确一次处理语义实现 - Spark高级玩法 - CSDN博客](https://blog.csdn.net/rlnLo2pNEfx9c/article/details/81369878)
+
+[使用 Flink 进行高吞吐，低延迟和 Exactly-Once 语义流处理 | Coder·码农网](https://www.codercto.com/a/26047.html)
+
+
 
 ## 检查点机制
 
