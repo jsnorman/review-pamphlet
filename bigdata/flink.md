@@ -43,10 +43,52 @@ StreamGraph client 断生成，
 ![image](http://static.lovedata.net/jpg/2018/12/19/18ea0ef010c3ffd585d8d2b49339fa09.jpg)
 ExecuteiGraph 是 JobGraph 的 并行化，打散哟。
 
+![image](http://static.lovedata.net/jpg/2018/12/19/22dd982bacb5fe7bee8500011e557d92.jpg)
 
+![image](http://static.lovedata.net/jpg/2018/12/19/86e18fdf4994bf07f68bb5ae17ad1659.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/e1fe6aff1099ad90891d52671d8c90d1.jpg)
 
 # 3. flink task slot 和 parallelism 介绍
 
 [ApacheFlink高级特性与高级应用之slot和parallelism介绍 - 云计算技术频道 - 红黑联盟](https://www.2cto.com/net/201711/699128.html)
+
+
+# 4. flink  window 
+
+![image](http://static.lovedata.net/jpg/2018/12/19/dcf5266ee5f1678a27a80eff417d5d15.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/cd4080e4f7c9e59b360c48ba1136b74d.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/ea6cd9344ce4fb46c9bce617370b54c1.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/ab65f1fbbb8e77c66de87447e69f5998.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/575621c9d99d1f3190b0b74f0999de36.jpg) 
+
+![image](http://static.lovedata.net/jpg/2018/12/19/7ea77f6cddf30dfdbf623a782cc1978a.jpg)
+
+
+# 5 flink time 类型
+![image](http://static.lovedata.net/jpg/2018/12/19/14d0f2ec99e2cce52bf6e0fb46239937.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/3a15271c14cebedba3f954d90e02751a.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/9ce2647f74831ab153afed6cd97d0345.jpg)
+
+
+![image](http://static.lovedata.net/jpg/2018/12/19/673cdde282c6e933a3194565b1facfe5.jpg)
+
+
+
+![image](http://static.lovedata.net/jpg/2018/12/19/a04a7670f524d8a91b15c843757e9097.jpg)
+
+![image](http://static.lovedata.net/jpg/2018/12/19/48b66e235bbeec64b39fd90f71c0eba3.jpg)
+
+allowLatency 窗口销毁时间延时， 比如延时 十秒钟，但是会重复计算窗口，造成数据异常
+
+
+
+
 
 
