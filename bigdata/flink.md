@@ -17,7 +17,9 @@ Asynchronous barrier snapshots  ABS算法
 
 2.FlinkKafkaConsumer08通过Kafka的低级API和Flink带barrier的轻量级checkpoint机制保证了在高吞吐量的情况下的exactly-once。
 
+[开发者干货 | 当Flink遇到Kafka -     FlinkKafkaConsumer使用详解](https://www.sohu.com/a/168546400_617676)
 
+当谈及仅一次处理时，**我们真正想表达的是每条输入消息只会影响最终结果一次**   ！【译者：影响应用状态一次，而非被处理一次】即使出现机器故障或软件崩溃，Flink也要保证不会有数据被重复处理或压根就没有被处理从而影响状态
 
 ## 检查点机制
 
