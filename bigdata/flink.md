@@ -1,4 +1,4 @@
-# 1. Flink 实现 exactly once 语义
+****# 1. Flink 实现 exactly once 语义
 
 [Flink  执行语义“Exactly once”详解 Asynchronous barrie... - 简书](https://www.jianshu.com/p/dd895ca12061)
 
@@ -29,7 +29,7 @@ Flink开发出了**checkpointing**机制，而它则是提供这种应用内仅�
 2. 消费的输入流位置
 
 
-在Flink 1.4版本之前，仅一次处理只限于Flink应用内。  后面的版本支持两阶段提交。   TwoPhaseCommitSinkFunction
+在Flink 1.4版本之前，仅一次处理只限于Flink应用内。  后面的版本支持两阶段提交。   **TwoPhaseCommitSinkFunction**
 
 
 
