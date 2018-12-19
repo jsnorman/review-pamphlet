@@ -31,6 +31,10 @@ Flink开发出了**checkpointing**机制，而它则是提供这种应用内仅�
 
 在Flink 1.4版本之前，仅一次处理只限于Flink应用内。  后面的版本支持两阶段提交。   **TwoPhaseCommitSinkFunction**
 
+**Kafka 0.11.0.0版本正式发布了对于事务的支持**——这是与Kafka交互的Flink应用要实现端到端仅一次语义的必要条件。
+
+
+
 
 
 ## 检查点机制
