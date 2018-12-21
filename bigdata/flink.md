@@ -1,4 +1,4 @@
-****# 1. Flink 实现 exactly once 语义
+# 1. Flink 实现 exactly once 语义
 
 [Flink  执行语义“Exactly once”详解 Asynchronous barrie... - 简书](https://www.jianshu.com/p/dd895ca12061)
 
@@ -134,6 +134,14 @@ allowLatency 窗口销毁时间延时， 比如延时 十秒钟，但是会重�
 
 # 7. flink spark  storm 的对比
 
+[干货 | Spark Streaming 和 Flink 详细对比](https://mp.weixin.qq.com/s/Fb1cW0oN7xYeb1oI2ixtgQ)
+
+[Spark Streaming 和 Flink 谁是数据开发者的最爱？](https://baijiahao.baidu.com/s?id=1608105805952821071&wfr=spider&for=pc)
+
+[Apache 流框架 Flink，Spark Streaming，Storm对比分析（二） - 网易云 - 博客园](https://www.cnblogs.com/163yun/p/9010969.html)
+
+[Apache 流框架 Flink，Spark Streaming，Storm对比分析（一） - 网易云社区博客 - CSDN博客](https://blog.csdn.net/wangyiyungw/article/details/80237270)
+
 
 Steaming
 
@@ -148,6 +156,19 @@ flink提供了基于每个事件的流式处理机制，所以可以被认为是
 因为spark的小批量机制，spark对于windowing的支持非常有限。只能基于process time，且只能对batches来做window。
 而Flink对window的支持非常到位，且Flink对windowing API的支持是相当给力的，允许基于process time,data time,record 来做windowing。
 我不太确定spark是否能引入这些API，不过到目前为止，Flink的windowing支持是要比spark好的。
+
+SQL interface
+目前spark-sql是spark里面最活跃的组件之一，Spark提供了类似Hive的sql和Dataframe这种DSL来查询结构化数据，API很成熟，在流式计算中使用很广，预计在流式计算中也会发展得很快。
+至于flink，到目前为止，Flink Table API只支持类似DataFrame这种DSL，并且还是处于beta状态，社区有计划增加SQL 的interface，但是目前还不确定什么时候才能在框架中用上。
+所以这个部分，spark胜出。
+
+# 8. flink 实现原理
+
+[Flink 原理与实现：理解 Flink 中的计算资源-博客-云栖社区-阿里云](https://yq.aliyun.com/articles/64819)
+
+[Flink原理与实现：如何生成ExecutionGraph及物理执行图-博客-云栖社区-阿里云](https://yq.aliyun.com/articles/225618)
+
+[Flink技术原理 - 曹世宏的博客 - CSDN博客](https://blog.csdn.net/qq_38265137/article/details/80547796)
 
 
 
