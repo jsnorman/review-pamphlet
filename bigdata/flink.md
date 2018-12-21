@@ -131,3 +131,14 @@ allowLatency 窗口销毁时间延时， 比如延时 十秒钟，但是会重�
 
 ![image](http://static.lovedata.net/jpg/2018/12/19/60e8da9a0c69904f783249af9b33eeee.jpg)
 
+
+# 7. flink spark  storm 的对比
+
+
+
+
+
+
+
+
+
