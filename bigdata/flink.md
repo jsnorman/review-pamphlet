@@ -144,8 +144,10 @@ flink提供了基于每个事件的流式处理机制，所以可以被认为是
 
 而spark，不是基于事件的粒度，而是用小批量来模拟流式，也就是多个事件的集合。所以spark被认为是近实时的处理系统。
 
-
-
+对 windowing 的支持
+因为spark的小批量机制，spark对于windowing的支持非常有限。只能基于process time，且只能对batches来做window。
+而Flink对window的支持非常到位，且Flink对windowing API的支持是相当给力的，允许基于process time,data time,record 来做windowing。
+我不太确定spark是否能引入这些API，不过到目前为止，Flink的windowing支持是要比spark好的。
 
 
 
