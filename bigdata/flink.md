@@ -137,7 +137,7 @@ allowLatency 窗口销毁时间延时， 比如延时 十秒钟，但是会重�
 
 Steaming
 
-
+spark把streaming看成是更快的批处理，而flink把批处理看成streaming的special case。这里面的思路决定了各自的方向，其中两者的差异点有如下这些：
 
 
 
