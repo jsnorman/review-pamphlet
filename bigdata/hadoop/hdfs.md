@@ -265,7 +265,9 @@ Map崩溃问题：
 约束Map输出：
     
     
-    
+ [HDFS块大小默认为什么是64MB(或者是128MB） - jzero_2008的专栏 - CSDN博客](https://blog.csdn.net/jzero_2008/article/details/80574101)
+ 
+    [一篇讲懂为什么HDFS文件块（block）大小设定为128M - 攻城狮Kevin - CSDN博客](https://blog.csdn.net/wx1528159409/article/details/84260023)   
 
 
 
