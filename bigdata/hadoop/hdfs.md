@@ -246,6 +246,11 @@ dfs.qjournal.write-txns.timeout.ms
 -XX:+CMSParallelRemarkEnabled -XX:+DisableExplicitGC 
 -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=75
  -XX:SoftRefLRUPolicyMSPerMB=0
+ 
+ 
+## 14. HDFS块大小默认为什么是64MB(或者是128MB）
+
+减少硬盘寻道时间
 
 
 
