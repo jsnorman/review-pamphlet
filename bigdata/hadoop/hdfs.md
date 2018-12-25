@@ -252,7 +252,20 @@ dfs.qjournal.write-txns.timeout.ms
 
 减少硬盘寻道时间
 
+减少Namenode内存消耗
 
+Map崩溃问题：
+
+监管时间问题
+
+
+问题分解问题
+
+
+约束Map输出：
+    
+    
+    
 
 
 
